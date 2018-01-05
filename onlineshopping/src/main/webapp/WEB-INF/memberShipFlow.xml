@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+	<!-- It will create an instance and keep it inside flowScope -->
+	<var name="user" class="net.bp.onlineshoppingBackend.dto.User" />
+	<var name="address" class="net.bp.onlineshoppingBackend.dto.Address" />
+
+	<!-- Executed when webFlow is triggered -->
+	<on-start>
+		<!-- registerHandler is java class available through annotated RegisterHandler.java class. -->
+		<evaluate expression="registerHandler.initFlow()" result="flowScope.registerModel" />
+	</on-start>
+
+
+	<view-state id="start" view="registration/register" model="user">
+		<transition on="submit" to="billing" />
+		<on-exit>
+			<evaluate expression="registerHandler.saveUser(registerModel,user)"></evaluate>
+		</on-exit>
+	</view-state>
+
+
+	<!-- User enters Billing Address -->
+	<view-state id="billing" view="registration/billing" model="flowScope.address">
+		<transition on="submit" to="confirm" />
+		<on-exit>
+			<evaluate expression="registerHandler.saveAddress(registerModel,address)"></evaluate>
+		</on-exit>
+	</view-state>
+
+	<view-state id="confirm" view="registration/preRegister" model="flowScope.registerModel">
+		<transition on="edit" to="start" />
+		<transition on="submit" to="saveRegistrationDetails"/>
+	</view-state>
+
+	<action-state id="saveRegistrationDetails">
+		<evaluate expression="registerHandler.saveRegistrationDetails(registerModel)"></evaluate>
+		<transition on="success" to="welcome" />
+		<transition on="failure" to="start" />
+	</action-state>
+
+	<end-state id="welcome" view="registration/welcome" />
+	<end-state id="toHome" view="externalRedirect:contextRelative:/index.jsp" />
+	<end-state id="toException"	view="externalRedirect:contextRelative:exception.jsp" />
+
+	<!-- these events are available in every state -->
+	<global-transitions>
+		<transition on="home" to="toHome" />
+		<transition on="error" to="toException" />
+	</global-transitions>
+</flow>
