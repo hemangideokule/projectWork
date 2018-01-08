@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
   <div class="container-fluid">
     <div class="navbar-header">
        <a class="navbar-brand" href="#"><i>Contact Us</i></a>

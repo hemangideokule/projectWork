@@ -1,15 +1,20 @@
 <%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
+  <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <html>
 <head>
-<title> KingsLand</title>
+<title> Book Store</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <link href=" https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link type="text/css" href="WEB-INF/nav.css" rel="stylesheet">
+
+
 </head>
+
 <body>
+<h1>HELLO</h1>
 <jsp:include page="header.jsp"></jsp:include>
 <div class="container">
 
@@ -25,16 +30,16 @@
 
 <div  class="carousel-inner">
 <div class="item active">
-<img class="img-responsive centre block" class="img-responsive centre block" src=<spring:url value="/resources/pic1.jpg/"></spring:url> height=100% width=100%>
-</div> 
-<div class="item">
-<img class="img-responsive centre block" class="img-responsive centre block" src=<spring:url value="/resources/pic2.jpg/"></spring:url> height=100% width=100%>
+<img class="img-responsive centre block" class="img-responsive centre block" src="<spring:url value="/resources/pic1.jpg/"></spring:url>" style="width:100%">
 </div>
 <div class="item">
-<img class="img-responsive centre block" class="img-responsive centre block" src=<spring:url value="/resources/pic3.jpg/"></spring:url> height=100% width=100%>
+<img class="img-responsive centre block" class="img-responsive centre block" src="<spring:url value="/resources/pic2.jpg/"></spring:url>" style="width:100%"> 
 </div>
 <div class="item">
-<img class="img-responsive centre block" class="img-responsive centre block" src=<spring:url value="/resources/pic4.jpg/"></spring:url> height=100% width=100%>
+<img class="img-responsive centre block" class="img-responsive centre block" src="<spring:url value="/resources/pic3.jpg/"></spring:url>" style="width:100%">
+</div>
+<div class="item">
+<img class="img-responsive centre block" class="img-responsive centre block" src="<spring:url value="/resources/pic4.jpg/"></spring:url>" style="width:100%">
 </div>
 
 
@@ -49,7 +54,6 @@
 <span class="glyphicon glyphicon-chevron-right"></span>
 <span class="sr-only">Next</span>
 </a>
-
 
 </div>
 </div>
