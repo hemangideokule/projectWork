@@ -1,0 +1,35 @@
+.navbar-default {
+    background-color: #F8F8F8;
+    border-color: #E7E7E7;
+}
+.panel-heading
+{
+	background-color: red;
+}
+.with-nav-tabs.panel-primary .nav-tabs > li >a,
+.with-nav-tabs.panel-primary .nav-tabs > li >a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li >a:focus
+{color:#fff;}
+
+.with-nav-tabs.panel-primary .nav-tabs > .open >a,
+.with-nav-tabs.panel-primary .nav-tabs > .open >a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > .open >a:focus,
+.with-nav-tabs.panel-primary .nav-tabs > li >a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li >a:focus
+{
+	color:#3498DB;
+		background-color:primary;
+		border-color:transparent;
+}
+
+.with-nav-tabs.panel-primary .nav-tabs > li >a,
+.with-nav-tabs.panel-primary .nav-tabs > li >a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li >a:focus
+{
+	
+	color:black;
+		background-color:#fff;
+		border-color:black;
+		border-bottom-color:transparent;
+		
+}

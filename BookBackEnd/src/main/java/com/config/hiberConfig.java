@@ -17,8 +17,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.DaoImpl.CategoryDaoImpl;
+import com.DaoImpl.SupplierDaoImpl;
 import com.DaoImpl.UserDaoImpl;
 import com.model.Category;
+import com.model.Product;
 import com.model.Supplier;
 import com.model.User;
 /*import com.model.User;*/
@@ -112,6 +115,7 @@ private final static String DATABASE_URL = "jdbc:h2:tcp://localhost/~/BookDb";
 		lsfb.addAnnotatedClass(User.class);
 		lsfb.addAnnotatedClass(Supplier.class);
 		lsfb.addAnnotatedClass(Category.class);
+		lsfb.addAnnotatedClass(Product.class);
 		
 		//lsfb.scanPackages("com.User");
 		System.out.println("SESSION FACTORY BEAN.......");
@@ -120,14 +124,28 @@ private final static String DATABASE_URL = "jdbc:h2:tcp://localhost/~/BookDb";
 	}
 
 	@Autowired
-	@Bean(name="userDaoImpl")
+	@Bean(name="UserDaoImpl")
 	public UserDaoImpl saveUserData(SessionFactory sf)
 	{	System.out.println("UserDaoImpl bean.......");
 		return new UserDaoImpl(sf);
 		
 	}
 	
-	
+	@Autowired
+	@Bean(name="SupplierDaoImpl")
+	public SupplierDaoImpl saveSuppData(SessionFactory sf)
+	{	System.out.println("UserDaoImpl bean.......");
+		return new SupplierDaoImpl(sf);
+		
+	}
+	@Autowired
+	@Bean(name="CategoryDaoImpl")
+	public CategoryDaoImpl saveCatData(SessionFactory sf)
+	{	System.out.println("UserDaoImpl bean.......");
+		return new CategoryDaoImpl(sf);
+		
+	}
+	@Autowired
 	@Bean(name="transactionManager")
 	public HibernateTransactionManager getTrans(SessionFactory sf)
 	{
