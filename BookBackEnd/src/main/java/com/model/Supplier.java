@@ -39,7 +39,7 @@ public class Supplier implements Serializable
 	}
 	
 	
-	@OneToMany(targetEntity=Product.class, fetch=FetchType.EAGER ,mappedBy ="Supplier")
+	@OneToMany(targetEntity=Product.class, fetch=FetchType.EAGER ,mappedBy ="supplier")
 	private Set<Product> product= new HashSet<Product>(0);
 	
 	public Set<Product> getProduct() {

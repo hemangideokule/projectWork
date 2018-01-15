@@ -18,6 +18,7 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.DaoImpl.CategoryDaoImpl;
+import com.DaoImpl.ProductDaoImpl;
 import com.DaoImpl.SupplierDaoImpl;
 import com.DaoImpl.UserDaoImpl;
 import com.model.Category;
@@ -141,8 +142,15 @@ private final static String DATABASE_URL = "jdbc:h2:tcp://localhost/~/BookDb";
 	@Autowired
 	@Bean(name="CategoryDaoImpl")
 	public CategoryDaoImpl saveCatData(SessionFactory sf)
-	{	System.out.println("UserDaoImpl bean.......");
+	{	System.out.println("Category bean.......");
 		return new CategoryDaoImpl(sf);
+		
+	}
+	@Autowired
+	@Bean(name="ProductDaoImpl")
+	public ProductDaoImpl saveProdData(SessionFactory sf)
+	{	System.out.println("Product bean.......");
+		return new ProductDaoImpl(sf);
 		
 	}
 	@Autowired

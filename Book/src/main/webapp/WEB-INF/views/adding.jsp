@@ -1,5 +1,8 @@
 <%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
   <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <html>
 <head>
@@ -36,7 +39,7 @@
 <div class="tab-content">
 
 <div class="tab-pane fade in active" id="tab1">
-	<form method="post"  class="form-signin" action="saveSupp">
+	<form method="post"  class="form-signin" action="saveSupp" >
 	<span id="reauth-email" class="reauth-email"></span>
 	<h3 class ="input-title"> Supplier Id</h3><br>
 	<input class="form-control"  type="number" name="sid" required >
@@ -54,12 +57,76 @@
 	<span id="reauth-email" class="reauth-email"></span>
 	<h3 class ="input-title"> Category Id</h3><br>
 	<input class="form-control"  type="number" name="cid" required >
+	
 	<h3 class ="input-title"> Category name</h3><br>
 	<input class="form-control"  type="text" name="cname" required >
+	
 	<br>
 	<button class="btn btn-lg btn-primary" type="submit"> Save</button>
 	<button class="btn btn-lg btn-warning" type="reset"> Cancel</button>
 	
+	
+	</form>
+</div>
+<div class="tab-pane fade" id="tab3">
+	<form method="post" class="form-signin" action="saveProduct" enctype="multipart/form-data" >
+	<span id="reauth-email" class="reauth-email"></span>
+	
+	<h3 class ="input-title"> Product Name</h3><br>
+	<input class="form-control"  type="text" name="pName" required >
+	
+	<h3 class ="input-title"> Product Description</h3><br>
+	<input class="form-control"  type="text" name="pDescription" required >
+	
+	<h3 class ="input-title"> Product Price</h3><br>
+	<input class="form-control"  type="number" name="pPrice" required >
+	
+	<h3 class ="input-title"> Product Stock</h3><br>
+	<input class="form-control"  type="number" name="pStock" required >
+	
+<div class="form-group">
+		<table>
+		<tr>
+		   <td> Select Supplier</td>
+		   <td> 
+		   <select class="form-control" name="pSupplier" required>
+		   <option value="">---Select Supplier---</option>
+		   
+		   <c:forEach items="${satList}" var="sat">
+            <option value="${sat.sid }">${sat.supplierName}</option>
+		   </c:forEach>
+		</select>
+	
+		</tr>
+		</table>
+	</div>
+	
+	<div class="form-group">
+		<table>
+		<tr>
+		   <td> Select Category</td>
+		   <td> 
+		   <select class="form-control" name="pCategory" required>
+		   <option value="">---Select Category---</option>
+		   
+		   <c:forEach items="${catList}" var="cat">
+            <option value="${cat.cid }">${cat.cname}</option>
+		   </c:forEach>
+		</select>
+	</tr>
+		</table>
+	</div>
+	
+	<div class="fileinput fileinput-new" data-provides="fileinput">
+	<td> Product Image</td>
+	<td><input class="form-control" type="file" name="file" accept="image/*"></td>
+
+	</div>
+	
+	
+	<br>
+	<button class="btn btn-lg btn-primary" type="submit"> Save</button>
+	<button class="btn btn-lg btn-warning" type="reset"> Cancel</button>
 	
 	</form>
 </div>

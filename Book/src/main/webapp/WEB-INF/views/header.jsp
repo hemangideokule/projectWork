@@ -1,5 +1,6 @@
 <%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
   <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <title> KingsLand</title>
@@ -19,17 +20,32 @@
       <a class="navbar-brand" href="#"><i>BookStore</i></a>
     </div>
     <ul class="nav navbar-nav">
-
+      <li><a href="index">HOME</a></li>
       <li><a href="adding">Product List</a></li>
-      
       <li><a href="adding">Admin</a></li>
-        <li><a href="goToRegister"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+	      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" 
+	      href="#">Admin List<span class="caret"></span></a>
+	      <ul class="dropdown-menu">
+	           <li><a href="categoryList"> Category</a></li>
+	            <li><a href="supplierList"> Supplier</a></li>
+	             <li><a href="productList">Product</a></li>
+	           </ul>
+	        </li>       
+       <li><a href="goToRegister"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+
+ <li class="dropdown">
+ <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+ Category Choice<span class="caret"></span></a>
+     <ul class="dropdown-menu">
+     <c:forEach var="catVal" items="${catList }">
+	           <li><a href="productCustList?cid=${catVal.cid}">${catVal.cname}</a></li>
+	          
+	          </c:forEach>
+	           </ul>
+</li>
     
     </ul>
-    
-
-    
-    
+   
   </div>
 </nav>
 </body>

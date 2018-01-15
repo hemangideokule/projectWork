@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,13 +27,6 @@ public class Product implements Serializable
 	private double price;
 	private int stock;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="cid")
-	private Category category;
-	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="sid")
-	private Supplier supplier;
 	
 	
 	
@@ -90,9 +84,16 @@ public class Product implements Serializable
 	public void setImgName(String imgName) {
 		this.imgName = imgName;
 	}
-	@javax.persistence.Transient
+@Transient
 	MultipartFile pimage;
 	private String imgName;
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="cid")
+	private Category category;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="sid")
+	private Supplier supplier;
 	
 	
 	

@@ -19,11 +19,9 @@
 
 <body> 
 <jsp:include page="header.jsp"></jsp:include>
-
-
-
+h2>Registration Form</h2>
 <div class="container">
-<h2>Registration Form</h2>
+<
 	<div class="col-sm-8">
 		<div class="row">
 		
