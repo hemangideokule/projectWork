@@ -17,11 +17,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.DaoImpl.CartDaoImpl;
 import com.DaoImpl.CategoryDaoImpl;
+import com.DaoImpl.OrdersDaoImpl;
 import com.DaoImpl.ProductDaoImpl;
 import com.DaoImpl.SupplierDaoImpl;
 import com.DaoImpl.UserDaoImpl;
+import com.model.Cart;
 import com.model.Category;
+import com.model.Orders;
 import com.model.Product;
 import com.model.Supplier;
 import com.model.User;
@@ -117,6 +121,9 @@ private final static String DATABASE_URL = "jdbc:h2:tcp://localhost/~/BookDb";
 		lsfb.addAnnotatedClass(Supplier.class);
 		lsfb.addAnnotatedClass(Category.class);
 		lsfb.addAnnotatedClass(Product.class);
+		lsfb.addAnnotatedClass(Cart.class);
+		lsfb.addAnnotatedClass(Orders.class);
+		
 		
 		//lsfb.scanPackages("com.User");
 		System.out.println("SESSION FACTORY BEAN.......");
@@ -153,6 +160,27 @@ private final static String DATABASE_URL = "jdbc:h2:tcp://localhost/~/BookDb";
 		return new ProductDaoImpl(sf);
 		
 	}
+	
+	@Autowired
+	@Bean(name="CartDaoImpl")
+	public CartDaoImpl saveCartData(SessionFactory sf)
+	{	System.out.println("Product bean.......");
+		return new CartDaoImpl(sf);
+		
+	}
+	
+	
+	@Autowired
+	@Bean(name="OrdersDaoImpl")
+	public OrdersDaoImpl saveOrderData(SessionFactory sf)
+	{	System.out.println("Product bean.......");
+		return new OrdersDaoImpl(sf);
+		
+	}
+	
+	
+	
+	
 	@Autowired
 	@Bean(name="transactionManager")
 	public HibernateTransactionManager getTrans(SessionFactory sf)

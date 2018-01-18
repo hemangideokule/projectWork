@@ -35,6 +35,15 @@ public String index()
 {
 return "index";		
 }
+
+@RequestMapping("/index")
+public String home()
+{
+return "index";		
+}
+
+
+
 	@RequestMapping(value="/goToRegister" , method=RequestMethod.GET)
 	 public ModelAndView goToRegister()
 	{
@@ -69,4 +78,35 @@ return "index";
 			m.addAttribute("prodList", productDaoImpl.retrieve());
 		}
 	
+	  @RequestMapping("/goToLogin")
+	  public String goToLogin ()
+	  {
+	  return "login";		
+	  }
+
+
+	  @RequestMapping("/userLogged")
+	  public String userLogged ()
+	  {
+	  return "redirect:/index";		
+	  }
+      
+
+	  @RequestMapping("/error")
+	  public String error ()
+	  {
+	  return "Error";		
+	  }
+
+	  @RequestMapping("/reLogin")
+	  public String reLogin ()
+	  {
+	  return "redirect:/goToLogin";		
+	  }
+
+
+
+
+
+
 }

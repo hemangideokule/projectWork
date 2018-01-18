@@ -13,53 +13,56 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-<br><br>
-<div class="container">
-<br><br>
-<br><br>
-
-<h2> Product List For Customers</h2>
-
 <table class="table table-hover" id="apl" class="display" border="2" width="80" align="center">
 <tr>
 <!-- <td>SI No<td> -->
 <th> PID </th>
 <th>Product Name</th>
-<th>Product Supplier</th>
-<th>Product Category</th>
-<th>Description</th>
-<th>Price</th>
-<th>Stock</th>
-<th>Image</th>
-<th class="span2"> Action</th>
+<th>Product Quantity</th>
+<th>Product Price</th>
+<th>Product Image</th>
+<th>Sub Total</th>
+<th>Action</th>
 </tr>
-
 <c:if test="${empty prodList }">
 <tr>
 <td colspan="10" align="center"> No Record Exist!!</td>
 </tr>
 </c:if>
 
-<c:forEach var="p" varStatus="st" items="${prodList }">
+<c:forEach var="p" varStatus="st" items="${cartInfo}">
 <tr>
 <%-- <td><c:out value="${st.count }"></c:out></td> --%>
-<td><c:out value="${p.pid}"></c:out></td>
-<td><c:out value="${p.prodName }"></c:out></td>
-<td><c:out value="${p.supplier.supplierName}"></c:out></td>
-<td><c:out value="${p.category.cname }"></c:out></td>
-<td class="span3"><c:out value="${p.description }"></c:out></td>
+<td><c:out value="${p.prodName}"></c:out></td>
+<td><c:out value="${p.qty }"></c:out></td>
 <td><c:out value="${p.price }"></c:out></td>
-<td><c:out value="${p.stock }"></c:out></td>
 
 <td><img src="${pageContext.request.contextPath }/resources/${p.imgName}" height="50px" width="50px"></td>
-<td class="span4">
-<c:set var="contextRoot" value="${ pageContext.request.contextPath}/productList"></c:set>
-<a class="btn btn-info" role="button" href="<c:url value="${contextRoot}/prodDetails/${p.pid }"/>"> Details</a>
+<td><c:out value="${p.qty * p.price }"></c:out></td>
+<td class="span 2">
+<c:set var="contextRoot" value="${ pageContext.request.contextPath}"></c:set>
+<a class="btn btn-danger" role="button" href="<c:url value="/deletePCart/${p.cartId }"/>"> Delete</a>
 </td>
 </tr>
 </c:forEach>
+<td>
+<c:set var="gtot" value="${gtot+p.price*p.qty }"></c:set>
+<span class="col-lg-9" align="right"><label>Grand Total</label><c:out value="${gtot }"/></span>
+</td>
+
+<tfoot>
+<td>
+<a class="btn btn-warning btn-lg " href="${ pageContext.request.contextPath}/index">Continue Shopping</a>
+</td>
+
+<td>
+<a class="btn btn-success btn-lg " href="${ pageContext.request.contextPath}/checkout">Checkout</a>
+</td>
+
+</tfoot>
+
+
+
 </table>
-</div>
 </body>
 </html>
-

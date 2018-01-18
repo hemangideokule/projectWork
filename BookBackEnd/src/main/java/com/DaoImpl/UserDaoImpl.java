@@ -1,5 +1,6 @@
 package com.DaoImpl;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,4 +34,21 @@ public class UserDaoImpl implements UserDao
 	session.saveOrUpdate(user);
 		session.getTransaction().commit();
 	}
+	
+	public User findUserByEmail(String email)
+	{
+		Session session= sessionFactory.openSession();
+		User u= null;
+		try {
+		session.beginTransaction();
+		u=session.get(User.class, email);
+		session.getTransaction().commit();
+		}
+		catch(HibernateException e)
+		{e.printStackTrace();}
+		return u;
+	
+	
+	}
+	
 }

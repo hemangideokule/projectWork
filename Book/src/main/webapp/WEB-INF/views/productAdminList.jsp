@@ -13,7 +13,9 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
+<br><br>
 <div class="container">
+<br><br>
 <h2> Product List For Admin</h2>
 
 <table class="table table-hover" id="apl" class="display" border="2" width="80" align="center">
@@ -40,7 +42,7 @@
 <tr>
 <td><c:out value="${st.count }"></c:out></td>
 <td><c:out value="${p.pid}"></c:out></td>
-<td><c:out value="${p.pname }"></c:out></td>
+<td><c:out value="${p.prodName }"></c:out></td>
 <td><c:out value="${p.supplier.supplierName}"></c:out></td>
 <td><c:out value="${p.category.cname }"></c:out></td>
 <td class="span3"><c:out value="${p.description }"></c:out></td>
@@ -50,8 +52,12 @@
 <td><img src="${pageContext.request.contextPath }/resources/${p.imgName}" height="50px" width="50px"/></td>
 <td class="span4">
 <c:set var="contextRoot" value="${ pageContext.request.contextPath}/productList"></c:set>
-<a class="btn btn-info" role="button" href="${ contextRoot}/updateProd?pid=<c:out value="${p.pid }"></c:out>"> Edit</a>
-<a class="btn btn-danger" role="button" href="<c:url value="/deleteProd/${p.pid}"/>"> Delete</a></td>
+ <a class="btn btn-info" role="button" href="${contextRoot }/admin/updateProd?pid=<c:out value="${p.pid }" ></c:out>"> Edit</a>
+ 
+ 
+<%--  <a class="btn btn-info" role="button" href="/admin/updateProd?pid=${p.pid } >"> Edit</a>
+ --%>
+<a class="btn btn-danger" role="button" href="<c:url value="/admin/deleteProd/${p.pid}"/>"> Delete</a></td>
 </tr>
 </c:forEach>
 </table>

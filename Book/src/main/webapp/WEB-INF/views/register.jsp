@@ -19,6 +19,7 @@
 
 <body> 
 <jsp:include page="header.jsp"></jsp:include>
+<br><br>
 h2>Registration Form</h2>
 <div class="container">
 <

@@ -18,6 +18,7 @@
 
 <body>
 <jsp:include page="header.jsp"></jsp:include>
+<br><br>
 <div class="container"><br>
 
 <div class="page-header">
@@ -39,7 +40,7 @@
 <div class="tab-content">
 
 <div class="tab-pane fade in active" id="tab1">
-	<form method="post"  class="form-signin" action="saveSupp" >
+	<form method="post"  class="form-signin" action="<c:url value="/admin/saveSupp"/>">
 	<span id="reauth-email" class="reauth-email"></span>
 	<h3 class ="input-title"> Supplier Id</h3><br>
 	<input class="form-control"  type="number" name="sid" required >
@@ -53,7 +54,7 @@
 
 
 <div class="tab-pane fade" id="tab2">
-	<form method="post" class="form-signin" action="saveCat" >
+	<form method="post" class="form-signin" action="<c:url value="/admin/saveCat"/>" >
 	<span id="reauth-email" class="reauth-email"></span>
 	<h3 class ="input-title"> Category Id</h3><br>
 	<input class="form-control"  type="number" name="cid" required >
@@ -69,7 +70,7 @@
 	</form>
 </div>
 <div class="tab-pane fade" id="tab3">
-	<form method="post" class="form-signin" action="saveProduct" enctype="multipart/form-data" >
+	<form method="post" class="form-signin" action="<c:url value="/admin/saveProduct"/>" enctype="multipart/form-data" >
 	<span id="reauth-email" class="reauth-email"></span>
 	
 	<h3 class ="input-title"> Product Name</h3><br>

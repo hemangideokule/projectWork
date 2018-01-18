@@ -28,17 +28,9 @@ import com.model.Supplier;
 
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
-
-	@RequestMapping("/adding")
-	public String adding()
-	{
-		
-		return "adding";
-	}
-
-	
-	@Autowired 
+    @Autowired 
 	SupplierDaoImpl supplierDaoImpl;
 	
 	@Autowired 
@@ -47,7 +39,14 @@ public class AdminController {
     @Autowired 
 	ProductDaoImpl productDaoImpl;
     
-    @ModelAttribute
+	@RequestMapping("/adding")
+	public String adding()
+	{
+		
+		return "adding";
+	}
+
+	 @ModelAttribute
 	public void loadingDataInPage(Model m)
 	{
 		m.addAttribute("catList", categoryDaoImpl.retrieve());
@@ -94,7 +93,7 @@ public class AdminController {
 		    ss.setSid(sid);
 			ss.setSupplierName(sname);
 			supplierDaoImpl.insertSupplier(ss);
-			mv.setViewName("adding");
+			mv.setViewName("modal");
 			return mv;
 	}
 	
@@ -107,7 +106,7 @@ public class AdminController {
 		 cc.setCid(cid);
 		 cc.setCname(cname);
 		 	categoryDaoImpl.insertCategory(cc);
-			mv.setViewName("adding");
+			mv.setViewName("modal");
 			return mv;
 	}
 	
@@ -116,7 +115,7 @@ public class AdminController {
 		public String saveProd(HttpServletRequest request, @RequestParam("file") MultipartFile file)
 		{
 		Product prod=new Product();
-		prod.setPname(request.getParameter("pName"));
+		prod.setProdName(request.getParameter("pName"));
 	
 		prod.setPrice(Double.parseDouble(request.getParameter("pPrice")));
 		prod.setDescription(request.getParameter("pDescription"));
@@ -143,7 +142,7 @@ public class AdminController {
     		 e.printStackTrace();
       }
     
-      return "adding";
+      return "modal";
       
 	}
 	
@@ -151,30 +150,42 @@ public class AdminController {
 	public String deleteProduct(@PathVariable("pid") int pid)
 	{
 	  productDaoImpl.deleteProduct(pid);
-	  return "redirect:/productList?del";
+	  return "redirect:/admin/productList";
 		
 	}
-	@RequestMapping("/updateProd")
+	/*@RequestMapping(value="/updateProd")
     public ModelAndView updateProduct(@RequestParam("pid") int pid)
 	{
-		System.out.println("update prod");
-		ModelAndView mv= new ModelAndView();
-			Product p= productDaoImpl.findByProdId(pid);
-	mv.addObject("prod",p);
-	mv.addObject("catList",categoryDaoImpl.retrieve());
-	mv.addObject("satList",supplierDaoImpl.retrieve());
-	mv.setViewName("UpdateProduct");
-	return mv;
-	}
 	
+		ModelAndView mav= new ModelAndView();
+			Product p= productDaoImpl.findByProdId(pid);
+	mav.addObject("prod",p);
+	mav.addObject("catList",categoryDaoImpl.retrieve());
+	mav.addObject("satList",supplierDaoImpl.retrieve());
+	mav.setViewName("UpdateProduct");
+	return mav;
+	}*/
+	@RequestMapping(value="/updateProd")
+	public ModelAndView updateProduct(@RequestParam("pid") int pid)
+	{
+		ModelAndView mv =new ModelAndView("UpdateProduct");
+		Product p=productDaoImpl.findByProdId(pid);
+		
+		mv.addObject("prod",p);
+		mv.addObject("catList",categoryDaoImpl.retrieve());
+		mv.addObject("satList", supplierDaoImpl.retrieve());
+		mv.setViewName("UpdateProduct");
+		return mv;
+
+	}
 	
 	@RequestMapping(value="/productUpdate" , method=RequestMethod.POST)
 	public String updateProd(HttpServletRequest request, @RequestParam("file") MultipartFile file)
 	{
-		String pid= request.getParameter("pid");
+		int pid= request.getIntHeader("pid");
 	Product prod=new Product();
-	prod.setPid(Integer.parseInt(pid));
-	prod.setPname(request.getParameter("pName"));
+
+	prod.setProdName(request.getParameter("pName"));
 	prod.setPrice(Double.parseDouble(request.getParameter("pPrice")));
 	prod.setDescription(request.getParameter("pDescription"));
 	prod.setStock(Integer.parseInt(request.getParameter("pStock")));
@@ -203,7 +214,8 @@ public class AdminController {
 		 e.printStackTrace();
   }
 
-  return "redirect:/productList?updateProduct";
+
+	return "redirect:/productList?updateProd";
   
 }
 	

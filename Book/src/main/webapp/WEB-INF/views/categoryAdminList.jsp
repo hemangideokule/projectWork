@@ -13,6 +13,7 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
+<br><br>
 <div class="container">
 <h2> Category List For Admin</h2>
 <table class="table table-hover" id="acl" class="display" border="2" width="80" align="center">
@@ -35,8 +36,8 @@
 <td><c:out value="${p.cname }"></c:out></td>
 <td class="span4">
 <c:set var="contextRoot" value="${ pageContext.request.contextPath}/categoryList"></c:set>
-<a class="btn btn-info" role="button" href="#"> Edit</a>
-<a class="btn btn-danger" role="button" href="#"> Delete</a>
+<a class="btn btn-info" role="button" href="${contextRoot }/admin/Edit"> Edit</a>
+<a class="btn btn-danger" role="button" href="${contextRoot }/admin/Delete"> Delete</a>
 
 </tr>
 </c:forEach>

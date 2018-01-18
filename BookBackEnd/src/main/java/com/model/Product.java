@@ -22,7 +22,7 @@ public class Product implements Serializable
 	@Id
 	@GeneratedValue
 	private int pid;
-	private String pname;
+	private String prodName;
 	private String description;
 	private double price;
 	private int stock;
@@ -36,11 +36,12 @@ public class Product implements Serializable
 	public void setPid(int pid) {
 		this.pid = pid;
 	}
-	public String getPname() {
-		return pname;
+	
+	public String getProdName() {
+		return prodName;
 	}
-	public void setPname(String pname) {
-		this.pname = pname;
+	public void setProdName(String prodName) {
+		this.prodName = prodName;
 	}
 	public String getDescription() {
 		return description;
