@@ -3,6 +3,7 @@ package com.controller;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -153,6 +154,21 @@ public class AdminController {
 	  return "redirect:/admin/productList";
 		
 	}
+	
+	@RequestMapping("/deleteProd/{cid}")
+	public String deleteCat(@PathVariable("cid") int cid)
+	{
+	  categoryDaoImpl.deleteCat(cid);
+	  return "redirect:/admin/categoryList";
+		
+	}
+	@RequestMapping("/deleteSat/{sid}")
+	public String deleteSat(@PathVariable("sid") int sid)
+	{
+	  supplierDaoImpl.deleteSat(sid);
+	  return "redirect:/admin/supplierList";
+		
+	}
 	/*@RequestMapping(value="/updateProd")
     public ModelAndView updateProduct(@RequestParam("pid") int pid)
 	{
@@ -168,16 +184,17 @@ public class AdminController {
 	@RequestMapping(value="/updateProd")
 	public ModelAndView updateProduct(@RequestParam("pid") int pid)
 	{
-		ModelAndView mv =new ModelAndView("UpdateProduct");
-		Product p=productDaoImpl.findByProdId(pid);
-		
-		mv.addObject("prod",p);
+		ModelAndView mv =new ModelAndView();
+		Product prod=productDaoImpl.findByProdId(pid);
+		/*List<Product> prod= productDaoImpl.findByProdId(pid);*/
+		mv.addObject("prod",prod);
 		mv.addObject("catList",categoryDaoImpl.retrieve());
 		mv.addObject("satList", supplierDaoImpl.retrieve());
 		mv.setViewName("UpdateProduct");
 		return mv;
 
 	}
+	
 	
 	@RequestMapping(value="/productUpdate" , method=RequestMethod.POST)
 	public String updateProd(HttpServletRequest request, @RequestParam("file") MultipartFile file)
@@ -219,7 +236,18 @@ public class AdminController {
   
 }
 	
-	
+	 @RequestMapping(value="/prodDetails/${p.pid }")
+	    public ModelAndView prodDetails(@PathVariable("pid") int pid)
+		{
+		ModelAndView mv= new ModelAndView();
+			/*Product prod= productDaoImpl.findByProdId(pid);
+			*/
+		   
+	Product prod= productDaoImpl.findByProdId(pid);
+		mv.addObject("prod",prod);
+       mv.setViewName("productDetails");
+		return mv;
+		}
 	
 	
 	

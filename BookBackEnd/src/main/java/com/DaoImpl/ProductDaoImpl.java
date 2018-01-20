@@ -63,6 +63,25 @@ public class ProductDaoImpl implements ProductDao
 	}
 
 
+/*	public List<Product>  findByProdId(int pid)
+	{
+		Session session= sessionFactory.openSession();
+		List<Product> p=null;
+		try
+		{
+		session.beginTransaction();
+		p= session.createQuery("from Product where pid="+pid).list();
+		session.getTransaction().commit();
+		}
+		catch(HibernateException e)
+		{
+			System.out.println(e.getMessage());
+			session.getTransaction().rollback();
+			
+		}
+		return p;
+	}*/
+	
 	
 	public List<Product> getProdByCatId(int cid )
 	{

@@ -71,6 +71,19 @@ return "index";
 		mv.setViewName("ProductCustList");
 		return mv;
 	}
+/*	@RequestMapping(value="/onlyProductCustList" )
+	 public ModelAndView getCustTable(@RequestParam("cid") int cid)
+	{
+		ModelAndView mv= new ModelAndView();
+		mv.addObject("prodList", productDaoImpl.getProdByCatId(cid));
+		mv.setViewName("ProductCustList");
+		return mv;
+	}*/
+	@RequestMapping("/onlyProductCustList")
+	public String productCustomerList()
+	{
+	return "ProductCustList";		
+	}
 	  @ModelAttribute
 		public void getData(Model m)
 		{
@@ -104,7 +117,15 @@ return "index";
 	  return "redirect:/goToLogin";		
 	  }
 
-
+		@RequestMapping(value="/productList", method=RequestMethod.GET)
+		public ModelAndView productList()
+		{
+			ModelAndView mv= new ModelAndView();
+			mv.addObject("prodList", productDaoImpl.retrieve());
+			mv.setViewName("productAdminList");
+			return mv;
+			
+		}
 
 
 

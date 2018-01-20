@@ -1,6 +1,7 @@
 <%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
   <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <html>
 <head>
 <title> KingsLand</title>
@@ -10,7 +11,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <link href=" https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link href="/resources/nav.css" rel="stylesheet" type="text/javascript">
+<!-- <link href="/resources/nav.css" rel="stylesheet" type="text/javascript"> -->
 </head>
 <body>
 
@@ -20,8 +21,12 @@
       <a class="navbar-brand" href="#"><i>BookStore</i></a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="index">HOME</a></li>
-      <li><a href="${ pageContext.request.contextPath}/productList">Product List</a></li>
+      <li><a href="${pageContext.request.contextPath }/index">HOME</a></li>
+  
+      
+      
+      <security:authorize access="hasRole('ROLE_ADMIN')">
+          <li><a href="${pageContext.request.contextPath }/productList">Product List</a></li>
       <li><a href="${ pageContext.request.contextPath}/admin/adding">Admin</a></li>
 	      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" 
 	      href="#">Admin List<span class="caret"></span></a>
@@ -31,8 +36,10 @@
 	             <li><a href="${ pageContext.request.contextPath}/admin/productList">Product</a></li>
 	           </ul>
 	        </li>   
-	        
+	        </security:authorize>
 	
+    <security:authorize access="hasRole('ROLE_USER')">
+        <li><a href="${pageContext.request.contextPath }/onlyProductCustList">Product List</a></li>
  <li class="dropdown">
  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
  Category Choice<span class="caret"></span></a>
@@ -41,8 +48,9 @@
 	           <li><a href="productCustList?cid=${catVal.cid}">${catVal.cname}</a></li>
 	  </c:forEach>
 	   </ul>
-
-    
+	    </li> 
+	   </security:authorize>
+ <li>   
 <ul class="nav navbar-nav navbar right">  
     <c:if test="${pageContext.request.userPrincipal.name==null }">
        <li><a href="${pageContext.request.contextPath }/goToRegister"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -56,7 +64,7 @@
      
      
 </ul>
- </li> 
+</li>
     
  </ul>
    

@@ -21,7 +21,11 @@
 
      
       <li><a href="#">COPYRIGHT</a></li>
-     
+  <li><a href="https://www.facebook.com/"> <span class="fa fa-facebook"> </span> Facebook </a> </li>
+	 <li><a href="https://twitter.com/"> <span class="fa fa-twitter"> </span> Twitter </a> </li>
+	 <li><a href="https://www.gmail.com/"> <span class="fa fa-linkedin">Gmail </span></a></li>
+	 <li><a href="https://www.instagram.com/"> <span class="fa fa-pinterest"> Instagram </span></a></li>
+
  
    
     </ul>

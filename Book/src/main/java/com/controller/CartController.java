@@ -1,8 +1,7 @@
 package com.controller;
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,8 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import com.DaoImpl.CartDaoImpl;
@@ -25,7 +23,7 @@ import com.DaoImpl.ProductDaoImpl;
 import com.DaoImpl.SupplierDaoImpl;
 import com.DaoImpl.UserDaoImpl;
 import com.model.Cart;
-
+import com.model.Orders;
 import com.model.Product;
 
 import com.model.User;
@@ -56,15 +54,17 @@ public class CartController {
 		{
 		ModelAndView mv= new ModelAndView();
 			Product prod= productDaoImpl.findByProdId(pid);
-		   mv.addObject("prod",prod);
-          mv.setViewName("ProdDetails");
+			
+/*		   
+		List<Product> prod= productDaoImpl.findByProdId(pid);*/
+		mv.addObject("prod",prod);
+          mv.setViewName("productDetails");
 		return mv;
 		}
 	    
 	    
 	    @RequestMapping(value="/addToCart" , method=RequestMethod.POST)
-	
-		 public ModelAndView addToCart( HttpServletRequest request)
+	    public ModelAndView addToCart( HttpServletRequest request)
 		{
 			ModelAndView mv= new ModelAndView();
 			
@@ -124,5 +124,52 @@ public class CartController {
 				   
 			   }
 		}
+
+	    
+	    @RequestMapping(value="/checkout" , method=RequestMethod.GET)
+	
+		 public ModelAndView checkout( HttpServletRequest req)
+		{ 
+	    
+            ModelAndView mv= new ModelAndView();
+			Principal principal=req.getUserPrincipal();
+			String userEmail= principal.getName();
+			User u=userDaoImpl.findUserByEmail(userEmail);
+			 List<Cart> cart=cartDaoImpl.findByCartId(userEmail);
+			 mv.addObject("user",u);
+			 mv.addObject("cart",cart);
+			 
+		return mv;
+	
+		}
+
+	    @RequestMapping(value="/orderProcess" , method=RequestMethod.GET)
+		
+			 public ModelAndView orderProcess( HttpServletRequest req)
+			{ 
+		    
+	            ModelAndView mv= new ModelAndView();
+				Principal principal=req.getUserPrincipal();
+				Orders ord=new Orders();
+				String userEmail= principal.getName();
+				User u=userDaoImpl.findUserByEmail(userEmail);
+				 Double total= Double.parseDouble(req.getParameter("total"));
+				 String payment =req.getParameter(userEmail);
+				 ord.setUser(u);
+				 ord.setPayment(payment);
+				 ord.setTotal(total);
+				 ordersDaoImpl.insertOrder(ord);
+                 mv.addObject("orderDetails",u);
+                 mv.setViewName("ack");
+				 return mv;
+		
+			}
+
+
+
+
+
+
+
 
 }

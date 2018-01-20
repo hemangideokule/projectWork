@@ -4,12 +4,15 @@ import javax.persistence.*;
 
 import org.springframework.stereotype.Component;
 
-import org.springframework.web.multipart.MultipartFile;
 
 @Component
 @Entity
-public class Orders 
+public class Orders implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue 
 	private int orderId;
@@ -17,6 +20,15 @@ public class Orders
 	@JoinColumn
 	private User user;
 	private String payment;
+	private Double total;
+	
+
+	public Double getTotal() {
+		return total;
+	}
+	public void setTotal(Double total) {
+		this.total = total;
+	}
 	public int getOrderId() {
 		return orderId;
 	}
