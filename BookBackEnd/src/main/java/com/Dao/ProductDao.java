@@ -9,5 +9,5 @@ public interface ProductDao {
 	public void insertProduct(Product product);
 	public List<Product> retrieve();
 	public Product findByProdId(int pid);
-	
+	/*Product getProduct(int id);*/
 }

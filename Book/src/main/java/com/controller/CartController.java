@@ -49,16 +49,16 @@ public class CartController {
 	    @Autowired 
 		UserDaoImpl userDaoImpl;
 	    
-	    @RequestMapping(value="/prodDetails/${p.pid }")
-	    public ModelAndView prodDetails(@PathVariable("pid") int pid)
-		{
+	   @RequestMapping(value="/prodDetails/{pid}")
+	    public ModelAndView prodDet(@PathVariable("pid") int pid)
+		{System.out.println("hi");
 		ModelAndView mv= new ModelAndView();
-			Product prod= productDaoImpl.findByProdId(pid);
-			
-/*		   
-		List<Product> prod= productDaoImpl.findByProdId(pid);*/
-		mv.addObject("prod",prod);
+			Product p= productDaoImpl.findByProdId(pid);
+		/*List<Product> prod= productDaoImpl.findByProdId(pid);*/
+		mv.addObject("prod",p);
+		System.out.println("hi too");
           mv.setViewName("productDetails");
+      	System.out.println("bye");
 		return mv;
 		}
 	    
@@ -82,9 +82,9 @@ public class CartController {
 					if(cartExist==null)
 					{
 						Cart cm= new Cart();
-						cm.setCartPrice(price);
 						cm.setCartProductId(pid);
-						cm.setCartStock(qty);
+						cm.setCartPrice(price);
+			            cm.setCartStock(qty);
 						cm.setCartImage(imgName);
 						cm.setCartProductName(prodName);;
 						

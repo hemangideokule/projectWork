@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import com.DaoImpl.CategoryDaoImpl;
 import com.DaoImpl.ProductDaoImpl;
 import com.DaoImpl.SupplierDaoImpl;
 import com.DaoImpl.UserDaoImpl;
+import com.model.Product;
 import com.model.User;
 
 @Controller
@@ -71,14 +73,7 @@ return "index";
 		mv.setViewName("ProductCustList");
 		return mv;
 	}
-/*	@RequestMapping(value="/onlyProductCustList" )
-	 public ModelAndView getCustTable(@RequestParam("cid") int cid)
-	{
-		ModelAndView mv= new ModelAndView();
-		mv.addObject("prodList", productDaoImpl.getProdByCatId(cid));
-		mv.setViewName("ProductCustList");
-		return mv;
-	}*/
+
 	@RequestMapping("/onlyProductCustList")
 	public String productCustomerList()
 	{
@@ -117,16 +112,17 @@ return "index";
 	  return "redirect:/goToLogin";		
 	  }
 
-		@RequestMapping(value="/productList", method=RequestMethod.GET)
-		public ModelAndView productList()
-		{
-			ModelAndView mv= new ModelAndView();
-			mv.addObject("prodList", productDaoImpl.retrieve());
-			mv.setViewName("productAdminList");
-			return mv;
-			
-		}
-
+	@RequestMapping(value="/productList", method=RequestMethod.GET)
+	public ModelAndView productList()
+	{
+		ModelAndView mv= new ModelAndView();
+		mv.addObject("prodList", productDaoImpl.retrieve());
+		mv.setViewName("productAdminList");
+		return mv;
+	
+	}
+	 
+	
 
 
 

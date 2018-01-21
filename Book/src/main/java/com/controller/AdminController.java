@@ -184,13 +184,16 @@ public class AdminController {
 	@RequestMapping(value="/updateProd")
 	public ModelAndView updateProduct(@RequestParam("pid") int pid)
 	{
+		System.out.println("hi");
 		ModelAndView mv =new ModelAndView();
-		Product prod=productDaoImpl.findByProdId(pid);
+		Product p=productDaoImpl.findByProdId(pid);
 		/*List<Product> prod= productDaoImpl.findByProdId(pid);*/
-		mv.addObject("prod",prod);
+		mv.addObject("prod",p);
 		mv.addObject("catList",categoryDaoImpl.retrieve());
 		mv.addObject("satList", supplierDaoImpl.retrieve());
+		System.out.println("hi too");
 		mv.setViewName("UpdateProduct");
+		System.out.println("bye");
 		return mv;
 
 	}
@@ -236,19 +239,19 @@ public class AdminController {
   
 }
 	
-	 @RequestMapping(value="/prodDetails/${p.pid }")
+	/* @RequestMapping(value="/prodDetails/${p.pid }")
 	    public ModelAndView prodDetails(@PathVariable("pid") int pid)
 		{
 		ModelAndView mv= new ModelAndView();
-			/*Product prod= productDaoImpl.findByProdId(pid);
-			*/
+			Product prod= productDaoImpl.findByProdId(pid);
+			
 		   
 	Product prod= productDaoImpl.findByProdId(pid);
 		mv.addObject("prod",prod);
        mv.setViewName("productDetails");
 		return mv;
 		}
-	
+	*/
 	
 	
 	

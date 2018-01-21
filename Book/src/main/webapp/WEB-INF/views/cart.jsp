@@ -14,6 +14,11 @@
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 <table class="table table-hover" id="apl" class="display" border="2" width="80" align="center">
+<br>
+<br>
+<br>
+<br>
+
 <tr>
 <!-- <td>SI No<td> -->
 <th> PID </th>

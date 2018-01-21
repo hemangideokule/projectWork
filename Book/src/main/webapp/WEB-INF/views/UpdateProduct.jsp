@@ -21,29 +21,29 @@
 <br><br>
 <div class="container">
 <c:url value="/productUpdate" var="pro"></c:url>
-<form method="post" class="form-signin" action="productUpdate" enctype="multipart/form-data" >
+<form method="post" action="productUpdate" enctype="multipart/form-data" >
 	<span id="reauth-email" class="reauth-email"></span>
 	<input type="hidden" name="pid" value="${prod.pid }">
 	
-	<h4 class ="input-title"> Product Name</h4><br>
-	<input value="${prod.prodName}  type="text" name="pName" required >
+	<h4 class ="input-title"> Product Name</h4>
+	<input value="${prod.prodName}" type="text" name="pName" required/ >
 	
-	<h4 class ="input-title"> Product Description</h4><br>
-	<input value="${prod.description }  type="text" name="pDescription" required >
+	<h4 class ="input-title"> Product Description  </h4> <br> 
+	<input value="${prod.description}"  type="text" name="pDescription" required />
 	
-	<h4 class ="input-title"> Product Price</h4><br>
-	<input value="${prod.price }  type="number" name="pPrice" required >
+	<h4 class ="input-title"> Product Price</h4>
+	<input value="${prod.price}" type="number" name="pPrice" required/ >
 	
-	<h4 class ="input-title"> Product Stock</h4><br>
-	<input value="${prod.stock}  type="number" name="pStock" required >
-	
+	<h4 class ="input-title"> Product Stock</h4>
+	<input value="${prod.stock}" type="number" name="pStock" required/ >
+	<br>
 <div class="form-group">
 		<table>
 		<tr>
 		   <td> Select Supplier</td>
 		   <td> 
-		   <select class="form-control" name="pSupplier" required>
-		   <option value="">---Select Supplier---</option>
+		   <select class="form-control" name="pSupplier" required/>
+		  <!--  <option value="">---Select Supplier---</option> -->
 		   
 		   <c:forEach items="${satList}" var="sat">
             <option value="${sat.sid }">${sat.supplierName}</option>
@@ -59,8 +59,8 @@
 		<tr>
 		   <td> Select Category</td>
 		   <td> 
-		   <select class="form-control" name="pCategory" required>
-		   <option value="">---Select Category---</option>
+		   <select class="form-control" name="pCategory" required/>
+		 <!--   <option value="">---Select Category---</option> -->
 		   
 		   <c:forEach items="${catList}" var="cat">
             <option value="${cat.cid }">${cat.cname}</option>

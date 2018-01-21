@@ -19,30 +19,37 @@
 <div class="row">
 <div class="col-xs-6" jumbotron>
 <div class="head">
+<br>
+<br>
+<br>
+<br>
+
 <label>Customer Shipping Details</label>
 </div>
 <div class="outer">
 <div class="well" style="width:100%">
-<form action="${pageContext.request.contextPath }/orderProcess" method="post">
+<form action="${pageContext.request.contextPath}/orderProcess" method="post">
 <c:set var="gtot" value="0"></c:set>
-<c:forEach var="c" items="${cart }">
+<c:forEach var="c" items="${cart}">
+<c:set var="gtot" value="${gtot+c.price*c.qty }"></c:set>
+
 </c:forEach>
 <div class="well">
 <table>
 <tr>
-<td colspan="3">NAME</td><td>${user.name }</td>
+<td colspan="3">NAME:</td><td>${user.name}</td>
 </tr>
 
 <tr>
-<td colspan="3">EMAIL</td><td>${user.email }</td>
+<td colspan="3">EMAIL ID:</td><td>${user.email}</td>
 </tr>
 
 <tr>
-<td colspan="3">ADDRESS</td><td>${user.address }</td>
+<td colspan="3">ADDRESS:</td><td>${user.address}</td>
 </tr>
 
 <tr>
-<td colspan="3">PHONE</td><td>${user.phone }</td>
+<td colspan="3">PHONE NO:</td><td>${user.phone}</td>
 </tr>
 </table>
 <div class="outer">
@@ -56,13 +63,19 @@
 <br><br>
 </div>
 Name: <input type="text" name="name on card">
+<br>
+
 Card Number:<input type="number" name="card number">
 
 </div>
+</form>
 </div>
 <input type="submit" value="PROCEED" style="width:75%" class="btn btn-danger">
+
 </div>
-</form>
+
+
+
 
 </div>
 </div>

@@ -20,11 +20,14 @@
 <img style="max-width:100%"; margin-top:30px;"
 src="${pageContext.request.contextPath }/resources/${prod.imgName}"/>
 </div>
-<div class="col-sm-4" style="border:0px solid gray">
+
+<div class="col-sm-5" style="border:0px solid gray">
+<br>
+<br>
 <h3>${prod.prodName }</h3>
 <h4>${prod.description }</h4>
 <h4>Rs. ${prod.price }</h4>
-<h5>${prod.supplierName }</h5>
+<h5>${prod.supplier.supplierName }</h5>
 
 <div class="section" style="padding-bottom:20px;">
 
@@ -38,7 +41,7 @@ src="${pageContext.request.contextPath }/resources/${prod.imgName}"/>
 <input type="number" class="form-control" name="pQty" required/><br><br>
 
 <input class="btn btn-warning btn-lg" type="submit" value="Add To Cart" >
-<h6><span class="glyphicon-heart-empty" style="cursor:pointer; color:Red;"></span>Wish List</h6>
+<h6><span class="glyphicon glyphicon-heart" style="cursor:pointer;color:red; size:50px"></span>Wish List</h6>
 
 </form>
 </div>
@@ -52,7 +55,9 @@ src="${pageContext.request.contextPath }/resources/${prod.imgName}"/>
 </div>
 
 <br><br>
-<h6> We Are Authorized company by Indian Government</h6>
+<div class="col-sm-9">
+<h5> We Are Authorized company by Indian Government</h5>
+</div>
 </div>
 </div>
 </body>

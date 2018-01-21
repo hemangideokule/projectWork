@@ -23,6 +23,7 @@ public class Product implements Serializable
 	@GeneratedValue
 	private int pid;
 	private String prodName;
+
 	private String description;
 	private double price;
 	private int stock;

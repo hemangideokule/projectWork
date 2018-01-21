@@ -52,9 +52,9 @@
 <td><c:out value="${p.stock }"></c:out></td>
 
 <td><img src="${pageContext.request.contextPath }/resources/${p.imgName}" height="50px" width="50px"></td>
-<td class="span4">
-<c:set var="contextRoot" value="${ pageContext.request.contextPath}/productList"></c:set>
-<a class="btn btn-info" role="button" href="<c:url value="${contextRoot}/prodDetails/${p.pid }"/>"> Details</a>
+<td class="span2">
+<c:set var="contextRoot" value="${ pageContext.request.contextPath}<%-- /productList --%>"></c:set>
+<a class="btn btn-info" role="button" href="<c:url value="/prodDetails/${p.pid }"/>"> Details</a>
 </td>
 </tr>
 </c:forEach>

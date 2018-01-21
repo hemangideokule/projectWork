@@ -52,7 +52,7 @@
 <td><img src="${ pageContext.request.contextPath}/resources/${p.imgName}" height="50px" width="50px"/></td>
 <td class="span4">
 <c:set var="contextRoot" value="${ pageContext.request.contextPath}/productList"></c:set>
-<a class="btn btn-info" role="button" href="/admin/updateProd?pid=<c:out value="${p.pid }"></c:out>" > Edit</a> 
+<a class="btn btn-info" role="button" href="updateProd?pid=<c:out value="${p.pid }"></c:out>" > Edit</a> 
  
  
 <a class="btn btn-danger" role="button" href="<c:url value="/admin/deleteProd/${p.pid}"/>"> Delete</a></td>

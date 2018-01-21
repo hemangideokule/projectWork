@@ -61,7 +61,9 @@ public class ProductDaoImpl implements ProductDao
 		}
 		return p;
 	}
-
+	/*public Product getProduct(int pid) {
+		return sessionFactory.getCurrentSession().get(Product.class, pid);
+	}*/
 
 /*	public List<Product>  findByProdId(int pid)
 	{
