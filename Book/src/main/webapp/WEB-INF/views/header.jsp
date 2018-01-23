@@ -49,6 +49,7 @@
 	  </c:forEach>
 	   </ul>
 	    </li> 
+	  <li><a href="${ pageContext.request.contextPath}/goToCart">My Cart</a></li>
 	   </security:authorize>
  <li>   
 <ul class="nav navbar-nav navbar right">  
@@ -60,6 +61,7 @@
     <c:if test="${pageContext.request.userPrincipal.name!=null }">
     	<li><a>Welcome:${pageContext.request.userPrincipal.name}</a></li>
        	<li><a href="${pageContext.request.contextPath }/logout">Log Out</a></li>
+       	<li><a href="${pageContext.request.contextPath }/goToCart"></a>
    </c:if>
      
      

@@ -30,12 +30,14 @@ private double cartPrice;
 private int cartStock;
 private String cartImage;
 private String cartProductName;
+private int cartQuantity;
+
 
 public Cart()
 {}
 
 
-public Cart(int cartId, int cartProductId, User cartUserDetails, Double cartPrice, int cartStock, String cartProductName)
+public Cart(int cartId, int cartProductId, User cartUserDetails, Double cartPrice, int cartStock, String cartProductName, String userMailId, int cartQuantity)
 {
 this.cartId=cartId;
 //this.cartImage=cartImage;
@@ -44,6 +46,7 @@ this.cartProductId=cartProductId;
 this.cartProductName=cartProductName;
 this.cartUserDetails=cartUserDetails;
 this.cartStock=cartStock;
+this.cartQuantity=cartQuantity;
 
 	
 }
@@ -119,6 +122,14 @@ public void setCartProductName(String cartProductName) {
 }
 
 
+public int getCartQuantity() {
+	return cartQuantity;
+}
+
+
+public void setCartQuantity(int cartQuantity) {
+	this.cartQuantity = cartQuantity;
+}
 
 
 }

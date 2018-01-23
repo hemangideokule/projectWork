@@ -13,12 +13,18 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
+<div class="col-sm-4 item-photo">
+<br>
+<br>
+<img style="max-width:100%"; margin-top:30px;"
+src="E:\cart.png" style="width:30%" height="30%"/>
+</div>
+<div class="col-sm-4">
+<br>
+<br>
+<h3>Your Cart</h3>
+</div>
 <table class="table table-hover" id="apl" class="display" border="2" width="80" align="center">
-<br>
-<br>
-<br>
-<br>
-
 <tr>
 <!-- <td>SI No<td> -->
 <th> PID </th>
@@ -29,7 +35,7 @@
 <th>Sub Total</th>
 <th>Action</th>
 </tr>
-<c:if test="${empty prodList }">
+<c:if test="${empty cart}">
 <tr>
 <td colspan="10" align="center"> No Record Exist!!</td>
 </tr>
@@ -37,22 +43,26 @@
 
 <c:forEach var="p" varStatus="st" items="${cartInfo}">
 <tr>
-<%-- <td><c:out value="${st.count }"></c:out></td> --%>
-<td><c:out value="${p.prodName}"></c:out></td>
-<td><c:out value="${p.qty }"></c:out></td>
-<td><c:out value="${p.price }"></c:out></td>
 
-<td><img src="${pageContext.request.contextPath }/resources/${p.imgName}" height="50px" width="50px"></td>
-<td><c:out value="${p.qty * p.price }"></c:out></td>
+
+ <td><c:out value="${p.cartId}"></c:out></td> 
+
+ <td><c:out value="${p.cartProductName}"></c:out></td> 
+
+<td><c:out value="${p.cartQuantity}"></c:out></td>
+<td><c:out value="${p.cartPrice}"></c:out></td>
+<td><img src="${pageContext.request.contextPath }/resources/${p.cartImage}" height="50px" width="50px"></td>
+<td><c:out value="${p.cartQuantity * p.cartPrice}"></c:out></td>
 <td class="span 2">
 <c:set var="contextRoot" value="${ pageContext.request.contextPath}"></c:set>
-<a class="btn btn-danger" role="button" href="<c:url value="/deletePCart/${p.cartId }"/>"> Delete</a>
+<a class="btn btn-danger" role="button" href="<c:url value="/deletePCart/${p.cartId}"/>"> Delete</a>
 </td>
 </tr>
+<c:set var="gtot" value="${ gtot+p.cartPrice*p.cartQuantity}"></c:set>
+
 </c:forEach>
 <td>
-<c:set var="gtot" value="${gtot+p.price*p.qty }"></c:set>
-<span class="col-lg-9" align="right"><label>Grand Total</label><c:out value="${gtot }"/></span>
+<span class="col-lg-9" align="right"><label>Grand Total:</label><c:out value="${gtot}"/></span>
 </td>
 
 <tfoot>

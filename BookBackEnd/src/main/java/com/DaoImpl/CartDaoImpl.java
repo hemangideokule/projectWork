@@ -34,15 +34,36 @@ public class CartDaoImpl implements CartDao
 		session.getTransaction().commit();
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Cart> findByCartId(String userId)
+
+/*	public List<Cart> findByCartId(String userId)
 	{
 		Session session= sessionFactory.openSession();
 	    List<Cart> cr=null;
 		try
 		{
 		session.beginTransaction();
-		cr=(List<Cart>)session.createQuery("from Cart where usermailId=:email ").setString("email", userId).list();
+		cr=(List<Cart>)session.createQuery("from Cart where usermailId=:email").setString("email", userId).list();
+				session.getTransaction().commit();
+		}
+		catch(HibernateException e)
+		{
+			System.out.println(e.getMessage());
+			session.getTransaction().rollback();
+			
+		}
+		return cr;
+	}*/
+	//@SuppressWarnings({ "unchecked", "unchecked" })
+	@SuppressWarnings("unchecked")
+	public List<Cart> findCartById(String userId)
+	{
+		Session session= sessionFactory.openSession();
+	    List<Cart> cr=null;
+		try
+		
+		{
+		session.beginTransaction();
+		cr=(List<Cart>)session.createQuery("from Cart where usermailId=:email").setString("email", userId).list();
 				session.getTransaction().commit();
 		}
 		catch(HibernateException e)
@@ -59,7 +80,7 @@ public class CartDaoImpl implements CartDao
 		Session session= sessionFactory.openSession();
 	    Cart cr=null;
 		session.beginTransaction();
-		cr=(Cart)session.createQuery("from Cart where usermailId=:email and cartProductId=:id ").setString("email", userEmail).setInteger("id", cartProductId).uniqueResult();
+		cr=(Cart)session.createQuery("from Cart where userMailId=:email and cartProductId=:id").setString("email", userEmail).setInteger("id", cartProductId).uniqueResult();
 				session.getTransaction().commit();
 				
 	return cr;

@@ -66,13 +66,16 @@ public class CartController {
 	    @RequestMapping(value="/addToCart" , method=RequestMethod.POST)
 	    public ModelAndView addToCart( HttpServletRequest request)
 		{
+	    	System.out.println("add to cart");
 			ModelAndView mv= new ModelAndView();
 			
 			Principal principal=request.getUserPrincipal();
 			String userEmail= principal.getName();
+			System.out.println(userEmail);
 			   try
 			   {
 				   int pid=Integer.parseInt(request.getParameter("pid"));
+				   System.out.println("pid="+pid);
 				   Double price=Double.parseDouble(request.getParameter("pPrice"));
 				   int qty=Integer.parseInt(request.getParameter("pQty"));
 					String prodName=request.getParameter("pName");
@@ -81,26 +84,31 @@ public class CartController {
 					Cart cartExist = cartDaoImpl.getCartById(pid, userEmail);
 					if(cartExist==null)
 					{
+						System.out.println("cart==null");
 						Cart cm= new Cart();
 						cm.setCartProductId(pid);
+						System.out.println("pid"+pid);
 						cm.setCartPrice(price);
+						
 			            cm.setCartStock(qty);
 						cm.setCartImage(imgName);
-						cm.setCartProductName(prodName);;
+						cm.setCartProductName(prodName);
+						System.out.println("name="+prodName);
 						
 						User u=userDaoImpl.findUserByEmail(userEmail);
 						cm.setCartUserDetails(u);
-				cartDaoImpl.insertCart(cm);
+				        cartDaoImpl.insertCart(cm);
 						
 					}
 					
 					else if(cartExist!=null)
 					{
+						System.out.println("cart!=null");
 						Cart cm= new Cart();
 						cm.setCartId(cartExist.getCartId());
 						cm.setCartProductId(pid);
 						cm.setCartPrice(price);
-						cm.setCartStock(cartExist.getCartStock()+qty);
+			            cm.setCartQuantity(cartExist.getCartQuantity()+qty);
 						cm.setCartImage(imgName);
 						cm.setCartProductName(prodName);
 						
@@ -109,18 +117,17 @@ public class CartController {
 				cartDaoImpl.updateCart(cm);
 					}
 					
-					
-			mv.addObject("cartInfo",cartDaoImpl.findByCartId(userEmail));
+			mv.addObject("cartInfo",cartDaoImpl.findCartById(userEmail));
 			mv.setViewName("cart");
 				   return mv;
 			   }
+			   
 			   catch(Exception e)
 			   {
-				   
 				   e.printStackTrace();
-					mv.addObject("cartInfo",cartDaoImpl.findByCartId(userEmail));
-					mv.setViewName("cart");
-						   return mv;
+				   mv.addObject("cartInfo",cartDaoImpl.findCartById(userEmail));
+				   mv.setViewName("cart");
+				   return mv;
 				   
 			   }
 		}
@@ -132,10 +139,14 @@ public class CartController {
 		{ 
 	    
             ModelAndView mv= new ModelAndView();
+            
 			Principal principal=req.getUserPrincipal();
+			
 			String userEmail= principal.getName();
+			
 			User u=userDaoImpl.findUserByEmail(userEmail);
-			 List<Cart> cart=cartDaoImpl.findByCartId(userEmail);
+			System.out.println(userEmail+"user mail....");
+			 List<Cart> cart=cartDaoImpl.findCartById(userEmail);
 			 mv.addObject("user",u);
 			 mv.addObject("cart",cart);
 			 
@@ -143,32 +154,64 @@ public class CartController {
 	
 		}
 
-	    @RequestMapping(value="/orderProcess" , method=RequestMethod.GET)
+	    @RequestMapping(value="/orderProcess" , method=RequestMethod.POST)
 		
 			 public ModelAndView orderProcess( HttpServletRequest req)
 			{ 
 		    
-	            ModelAndView mv= new ModelAndView();
+	            ModelAndView mv= new ModelAndView("ack");
+	        	Orders ord=new Orders();
 				Principal principal=req.getUserPrincipal();
-				Orders ord=new Orders();
 				String userEmail= principal.getName();
-				User u=userDaoImpl.findUserByEmail(userEmail);
-				 Double total= Double.parseDouble(req.getParameter("total"));
-				 String payment =req.getParameter(userEmail);
-				 ord.setUser(u);
+				
+				List<Cart> cart=cartDaoImpl.findCartById(userEmail);	
+				
+				Double total= Double.parseDouble(req.getParameter("total"));
+				 String payment =req.getParameter("payment");
+				User users=userDaoImpl.findUserByEmail(userEmail);
+				 ord.setUser(users);
 				 ord.setPayment(payment);
 				 ord.setTotal(total);
 				 ordersDaoImpl.insertOrder(ord);
-                 mv.addObject("orderDetails",u);
-                 mv.setViewName("ack");
+				 mv.addObject("user", userDaoImpl.findUserByEmail(userEmail));
+                 mv.addObject("orderDetails",users);
+                 mv.addObject("cart",cart);
 				 return mv;
 		
 			}
 
+@RequestMapping("/ack")
+public String ack()
+{
+return "ack";	
+}
 
 
+@RequestMapping(value="/goToCart" , method=RequestMethod.GET)
+public ModelAndView gotocart( HttpServletRequest req)
+{ 
+ModelAndView mv= new ModelAndView();
+Principal principal=req.getUserPrincipal();
+String userEmail= principal.getName();
+mv.addObject("cartInfo", cartDaoImpl.findCartById(userEmail));
+ mv.setViewName("cart");
+ 
+return mv;
 
+}
 
+@RequestMapping(value="/deletePCart/{cartId}")
+public ModelAndView deletecartItem(@PathVariable("cardId") int cartId,HttpServletRequest req)
+{
+	ModelAndView mv= new ModelAndView();
+	Principal principal=req.getUserPrincipal();
+	String userEmail= principal.getName();
+	cartDaoImpl.deleteCart(cartId);
+	mv.addObject("cardInfo",cartDaoImpl.findCartById(userEmail));
+	mv.setViewName("cart");
+return mv;	
+	
+}
 
 
 

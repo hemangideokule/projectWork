@@ -164,7 +164,7 @@ private final static String DATABASE_URL = "jdbc:h2:tcp://localhost/~/BookDb";
 	@Autowired
 	@Bean(name="CartDaoImpl")
 	public CartDaoImpl saveCartData(SessionFactory sf)
-	{	System.out.println("Product bean.......");
+	{	System.out.println("Cart bean.......");
 		return new CartDaoImpl(sf);
 		
 	}
@@ -173,7 +173,7 @@ private final static String DATABASE_URL = "jdbc:h2:tcp://localhost/~/BookDb";
 	@Autowired
 	@Bean(name="OrdersDaoImpl")
 	public OrdersDaoImpl saveOrderData(SessionFactory sf)
-	{	System.out.println("Product bean.......");
+	{	System.out.println("order bean.......");
 		return new OrdersDaoImpl(sf);
 		
 	}

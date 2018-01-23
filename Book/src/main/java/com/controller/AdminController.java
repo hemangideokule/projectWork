@@ -191,9 +191,9 @@ public class AdminController {
 		mv.addObject("prod",p);
 		mv.addObject("catList",categoryDaoImpl.retrieve());
 		mv.addObject("satList", supplierDaoImpl.retrieve());
-		System.out.println("hi too");
+		System.out.println("hi2");
 		mv.setViewName("UpdateProduct");
-		System.out.println("bye");
+		System.out.println("hi3");
 		return mv;
 
 	}
@@ -202,6 +202,7 @@ public class AdminController {
 	@RequestMapping(value="/productUpdate" , method=RequestMethod.POST)
 	public String updateProd(HttpServletRequest request, @RequestParam("file") MultipartFile file)
 	{
+		System.out.println("update url");
 		int pid= request.getIntHeader("pid");
 	Product prod=new Product();
 
@@ -231,11 +232,13 @@ public class AdminController {
 	 catch(IOException e)
   {
 		 
-		 e.printStackTrace();
+		/* e.printStackTrace();*/
+  e.getMessage();
   }
 
 
-	return "redirect:/productList?updateProd";
+	/*return "redirect:/productList?updateProd";*/
+  return "modal";
   
 }
 	
