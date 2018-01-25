@@ -37,6 +37,7 @@ public class UserDaoImpl implements UserDao
 	
 	public User findUserByEmail(String email)
 	{
+		System.out.println("USERMAILID");
 		Session session= sessionFactory.openSession();
 		User u= null;
 		try {

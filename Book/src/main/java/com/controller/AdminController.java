@@ -151,7 +151,7 @@ public class AdminController {
 	public String deleteProduct(@PathVariable("pid") int pid)
 	{
 	  productDaoImpl.deleteProduct(pid);
-	  return "redirect:/admin/productList";
+	  return "deleteModal";
 		
 	}
 	
@@ -238,7 +238,7 @@ public class AdminController {
 
 
 	/*return "redirect:/productList?updateProd";*/
-  return "modal";
+  return "updateModal";
   
 }
 	

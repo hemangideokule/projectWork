@@ -28,7 +28,7 @@
 </div>
 <div class="outer">
 <div class="well" style="width:100%">
-<form action="${pageContext.request.contextPath}/orderProcess" method="post">
+<form action="/orderProcess" method="post">
 <c:set var="gtot" value="0"></c:set>
 <c:forEach var="c" items="${cart}">
 <c:set var="gtot" value="${gtot+c.price*c.qty}"></c:set>
@@ -66,12 +66,17 @@ Name: <input type="text" name="name on card">
 <br>
 
 Card Number:<input type="number" name="card number">
+<br>
+CVV:<input type="number" name="cvv">
+
 <input type="hidden" name="total" value="${gtot}">
 
 </div>
 </form>
 </div>
 <input type="submit" value="PROCEED" style="width:75%" class="btn btn-danger">
+<input type="reset" value="CANCEL" style="width:75%" class="btn btn-primary">
+
 
 </div>
 

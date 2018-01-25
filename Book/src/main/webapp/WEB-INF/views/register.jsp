@@ -27,12 +27,15 @@ h2>Registration Form</h2>
 		<div class="row">
 		
 		<form:form modelAttribute="user" action="saveRegister" method="post">
+			<div class="col-lg-12">
 			<div class="form-group">
+			<form:errors path="name" cssClass="err"/><br>
 		<label> Name :  </label>
 		<form:input path="name" class="form-control" placeholder= "Enter name"/>
 		</div>
 		
 		<div class="form-group">
+			<form:errors path="email" cssClass="err"/><br>
 		<label> Email :  </label><br>
 		<form:input path="email" class="form-control" placeholder= "Enter Email"/>
 		</div>
@@ -48,6 +51,7 @@ h2>Registration Form</h2>
 		</div>
 		
 		<div class="form-group">
+			<form:errors path="phone" cssClass="err"/><br>
 		<label> Phone No :  </label><br>
 		<form:input path="phone" class="form-control" placeholder= "Enter Phone"/>
 		</div>
@@ -55,7 +59,7 @@ h2>Registration Form</h2>
 		<br>
 		<button type="submit" class="btn btn-lg  btn-info">SUBMIT</button>
 		<button type="reset" class="btn btn-lg  tn-danger">CANCEL</button>
-		
+		</div>
 		</form:form>
 		
 		</div> <!-- row end -->

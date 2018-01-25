@@ -105,12 +105,14 @@ public class ProductDaoImpl implements ProductDao
 		return prod;
 	}
 
-	public void updateProduct(Product p)
+	public void updateProduct(Product prod)
 	{
 		Session session= sessionFactory.openSession();
 		session.beginTransaction();
-		session.update(p);
-		
+		/*session.saveOrUpdate(prod);
+		*/
+		session.update(prod);
+		System.out.println("update method in daoimpl");
 		session.getTransaction().commit();
 	}
 	/*public void updateProduct(Product prod)

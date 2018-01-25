@@ -1,9 +1,12 @@
 package com.controller;
 
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,14 +59,22 @@ return "index";
 		return mv;
 	}
 	@RequestMapping(value="/saveRegister" , method=RequestMethod.POST)
-	 public ModelAndView saveRegister(@ModelAttribute("user")User user)
+	 public ModelAndView saveRegister(@Valid @ModelAttribute("user")User user,BindingResult result )
 	{
 		ModelAndView mav= new ModelAndView();
-	
-			user.setRole("ROLE_USER");
-			userDaoImpl.insertUser(user);
+	if(result.hasErrors())
+	{
+			
 			mav.setViewName("index");
 		return mav;
+	}
+	else
+	{
+		user.setRole("ROLE_USER");
+		userDaoImpl.insertUser(user);
+		mav.setViewName("index");
+		return mav;
+	}
 	}
 	@RequestMapping(value="/productCustList" )
 	 public ModelAndView getCustTable(@RequestParam("cid") int cid)

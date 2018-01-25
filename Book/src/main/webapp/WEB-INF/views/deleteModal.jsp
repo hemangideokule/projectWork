@@ -27,11 +27,11 @@ aria-labelleby="myModal" aria-hidden="true" id="onload" >
      <button type="button" class="close" data-dismiss="modal">X</button>
      </div>
      
-    	 <div class="modal-body"><span> Saved Successfully..!!</span>
+    	 <div class="modal-body"><span> Record Deleted..!!</span>
     	</div>
      
      <div class="modal-footer">
-     <a href="${pageContext.request.contextPath }/admin/adding"
+     <a href="${pageContext.request.contextPath }/admin/productList"
      class="btn btn-info" role="button"> Back</a>
      </div>
      

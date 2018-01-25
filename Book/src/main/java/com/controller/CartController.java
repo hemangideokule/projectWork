@@ -71,7 +71,7 @@ public class CartController {
 			
 			Principal principal=request.getUserPrincipal();
 			String userEmail= principal.getName();
-			System.out.println(userEmail);
+			System.out.println("usermail="+userEmail);
 			   try
 			   {
 				   int pid=Integer.parseInt(request.getParameter("pid"));
@@ -98,7 +98,6 @@ public class CartController {
 						User u=userDaoImpl.findUserByEmail(userEmail);
 						cm.setCartUserDetails(u);
 				        cartDaoImpl.insertCart(cm);
-						
 					}
 					
 					else if(cartExist!=null)
@@ -134,16 +133,11 @@ public class CartController {
 
 	    
 	    @RequestMapping(value="/checkout" , method=RequestMethod.GET)
-	
-		 public ModelAndView checkout( HttpServletRequest req)
+	    public ModelAndView checkout( HttpServletRequest req)
 		{ 
-	    
-            ModelAndView mv= new ModelAndView();
-            
-			Principal principal=req.getUserPrincipal();
-			
+	        ModelAndView mv= new ModelAndView();
+        	Principal principal=req.getUserPrincipal();
 			String userEmail= principal.getName();
-			
 			User u=userDaoImpl.findUserByEmail(userEmail);
 			System.out.println(userEmail+"user mail....");
 			 List<Cart> cart=cartDaoImpl.findCartById(userEmail);
@@ -154,7 +148,7 @@ public class CartController {
 	
 		}
 
-	    @RequestMapping(value="/orderProcess" , method=RequestMethod.POST)
+	   /* @RequestMapping(value="/orderProcess" , method=RequestMethod.POST)
 		
 			 public ModelAndView orderProcess( HttpServletRequest req)
 			{ 
@@ -178,7 +172,35 @@ public class CartController {
                  mv.addObject("cart",cart);
 				 return mv;
 		
-			}
+			}*/
+	    @RequestMapping(value="/orderProcess" , method=RequestMethod.POST)
+		 public ModelAndView orderProcess(HttpServletRequest req)
+		{ 
+	    
+           ModelAndView mv= new ModelAndView("ack");
+			Orders ord=new Orders();
+			
+			Principal principal=req.getUserPrincipal();
+			String userEmail= principal.getName();
+			List<Cart> cart= cartDaoImpl.findCartById(userEmail);
+		
+			 Double total= Double.parseDouble(req.getParameter("total"));
+			/* String payment=req.getParameter("payment");*/
+			User users=userDaoImpl.findUserByEmail(userEmail);
+			 String payment =req.getParameter(userEmail);
+			 
+			 ord.setUser(users);
+			 ord.setPayment(payment);
+			 ord.setTotal(total);
+			 ordersDaoImpl.insertOrder(ord);
+     
+            mv.addObject("u",userDaoImpl.findUserByEmail(userEmail));
+            mv.addObject("orderDetails",users);
+            mv.addObject("cart",cart);
+            //mv.setViewName("ack");
+			 return mv;
+	
+		}
 
 @RequestMapping("/ack")
 public String ack()

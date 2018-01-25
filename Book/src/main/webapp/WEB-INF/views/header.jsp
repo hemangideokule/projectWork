@@ -28,17 +28,22 @@
       <security:authorize access="hasRole('ROLE_ADMIN')">
           <li><a href="${pageContext.request.contextPath }/productList">Product List</a></li>
       <li><a href="${ pageContext.request.contextPath}/admin/adding">Admin</a></li>
-	      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" 
+	      <li class="dropdown">
+	      <a class="dropdown-toggle" data-toggle="dropdown" 
 	      href="#">Admin List<span class="caret"></span></a>
 	      <ul class="dropdown-menu">
-	           <li><a href="${ pageContext.request.contextPath}/admin/categoryList"> Category</a></li>
+	         <li><a href="${ pageContext.request.contextPath}/admin/categoryList"> Category</a></li>
 	            <li><a href="${ pageContext.request.contextPath}/admin/supplierList"> Supplier</a></li>
-	             <li><a href="${ pageContext.request.contextPath}/admin/productList">Product</a></li>
+	             <li><a href="${ pageContext.request.contextPath}/admin/productList">Product</a></li> 
+	              <%-- <li><a href="${ pageContext.request.contextPath}/categoryList"> Category</a></li>
+	            <li><a href="${ pageContext.request.contextPath}/supplierList"> Supplier</a></li>
+	             <li><a href="${ pageContext.request.contextPath}/productList">Product</a></li> --%>
 	           </ul>
 	        </li>   
 	        </security:authorize>
+	        
 	
-    <security:authorize access="hasRole('ROLE_USER')">
+<%--     <security:authorize access="hasRole('ROLE_USER')"> --%>
         <li><a href="${pageContext.request.contextPath }/onlyProductCustList">Product List</a></li>
  <li class="dropdown">
  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -50,7 +55,7 @@
 	   </ul>
 	    </li> 
 	  <li><a href="${ pageContext.request.contextPath}/goToCart">My Cart</a></li>
-	   </security:authorize>
+	<%--    </security:authorize> --%>
  <li>   
 <ul class="nav navbar-nav navbar right">  
     <c:if test="${pageContext.request.userPrincipal.name==null }">
