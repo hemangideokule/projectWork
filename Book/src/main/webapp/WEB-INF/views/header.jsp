@@ -42,9 +42,9 @@
 	        </li>   
 	        </security:authorize>
 	        
-	
-<%--     <security:authorize access="hasRole('ROLE_USER')"> --%>
+    <security:authorize access="hasRole('ROLE_USER')">
         <li><a href="${pageContext.request.contextPath }/onlyProductCustList">Product List</a></li>
+       </security:authorize> 
  <li class="dropdown">
  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
  Category Choice<span class="caret"></span></a>
@@ -54,8 +54,8 @@
 	  </c:forEach>
 	   </ul>
 	    </li> 
-	  <li><a href="${ pageContext.request.contextPath}/goToCart">My Cart</a></li>
-	<%--    </security:authorize> --%>
+
+	
  <li>   
 <ul class="nav navbar-nav navbar right">  
     <c:if test="${pageContext.request.userPrincipal.name==null }">
@@ -66,7 +66,8 @@
     <c:if test="${pageContext.request.userPrincipal.name!=null }">
     	<li><a>Welcome:${pageContext.request.userPrincipal.name}</a></li>
        	<li><a href="${pageContext.request.contextPath }/logout">Log Out</a></li>
-       	<li><a href="${pageContext.request.contextPath }/goToCart"></a>
+       	<li><a href="${pageContext.request.contextPath }/goToCart">My Cart
+       	<i class="fa fa-cart-plus"  aria-hidden="true"></i></a></li>
    </c:if>
      
      

@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.Dao.ProductDao;
@@ -104,25 +105,26 @@ public class ProductDaoImpl implements ProductDao
 		
 		return prod;
 	}
+	public Product get(int pid) {
 
+		return sessionFactory.getCurrentSession().get(Product.class, pid);
+	}
 	public void updateProduct(Product prod)
 	{
-		Session session= sessionFactory.openSession();
+		/*Session session= sessionFactory.openSession();
 		session.beginTransaction();
-		/*session.saveOrUpdate(prod);
-		*/
+		session.saveOrUpdate(prod);
+		
 		session.update(prod);
 		System.out.println("update method in daoimpl");
-		session.getTransaction().commit();
-	}
-	/*public void updateProduct(Product prod)
-	{
+		session.getTransaction().commit();*/
+		
 		Session session= sessionFactory.openSession();
-		session.beginTransaction();
-		Product p=session.get(Product.class, prod);
-	session.update(p);
-		session.getTransaction().commit();
-	}*/
+		Transaction trans= session.beginTransaction();
+		session.update(prod);
+		trans.commit();
+	}
+	
 
 	
 	public void deleteProduct(int pid)
@@ -133,5 +135,11 @@ public class ProductDaoImpl implements ProductDao
 	session.delete(p);
 		session.getTransaction().commit();
 	}
+
+	public boolean update(Product product) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 
 }

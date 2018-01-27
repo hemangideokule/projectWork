@@ -9,4 +9,6 @@ public interface SupplierDao {
 	public void insertSupplier(Supplier supplier);
 	public List<Supplier> retrieve();
 	public Supplier findBySuppId(int sid);
+	public void updateSupplier(Supplier supp);
+	
 }

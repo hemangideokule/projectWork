@@ -18,26 +18,27 @@
 
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-<br><br><br><br>
+<br><br>
+<br><br>
+<h3> Come Here To Update....!!</h3>
 <div class="container">
-<c:url value="/productUpdate" var="pro"></c:url>
-<form method="post" action="productUpdate" enctype="multipart/form-data" >
+<c:url value="/supplierUpdate" var="pro"></c:url>
+<form method="post" action="${pageContext.request.contextPath }/admin/supplierUpdate"  >
 	<span id="reauth-email" class="reauth-email"></span>
-	<input type="hidden" name="pid" value="${prod.pid }">
+	<input type="hidden" name="sid" value="${supp.sid }">
 	
-	<h4 class ="input-title"> Product Name :	<input value="${prod.prodName}" type="text" name="pName" required/ >
-	 </h4>
-
-	<h4 class ="input-title"> Product Description :	<input value="${prod.description}"  type="text" name="pDescription" required /> </h4> <br> 
+	<h4 class ="input-title"> Supplier Name: </h4>
+	<input value="${supp.supplierName}" type="text" name="supplierName" required/ >
+	<h4 class ="input-title"> Supplier Address : </h4>  
+	 <input value="${supp.address}"  type="text" name="address" required />
+	<h4 class ="input-title"> Supplier Phone : </h4>
+	<input value="${supp.phone}" type="number" name="phone" required/ >
+	
 
 	
-	<h4 class ="input-title"> Product Price :  	<input value="${prod.price}" type="number" name="pPrice" required/ ></h4>
-
+<%-- 
 	
-	<h4 class ="input-title"> Product Stock :	<input value="${prod.stock}" type="number" name="pStock" required/ ></h4>
-
-	<br>
-<div class="form-group">
+	<div class="form-group">
 		<table>
 		<tr>
 		   <td> Select Supplier</td>
@@ -52,32 +53,11 @@
 	
 		</tr>
 		</table>
-	</div>
-	
-	<div class="form-group">
-		<table>
-		<tr>
-		   <td> Select Category</td>
-		   <td> 
-		   <select class="form-control" name="pCategory" required/>
-		 <!--   <option value="">---Select Category---</option> -->
-		   
-		   <c:forEach items="${catList}" var="cat">
-            <option value="${cat.cid }">${cat.cname}</option>
-		   </c:forEach>
-		</select>
-	</tr>
-		</table>
-	</div>
-	
-	<div class="fileinput fileinput-new" data-provides="fileinput">
-	<td> Product Image</td>
-	<td><input class="form-control" type="file" name="file" accept="image/*"></td>
-
-	</div>
-	
+	</div> --%>
 	
 	<br>
+	<br>
+	
 	<button class="btn btn-lg btn-primary" type="submit"> Update</button>
 	<button class="btn btn-lg btn-warning" type="reset"> Cancel</button>
 	

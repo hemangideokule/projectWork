@@ -7,12 +7,15 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.Dao.SupplierDao;
 import com.model.Category;
+import com.model.Product;
 import com.model.Supplier;
 
 
@@ -79,6 +82,18 @@ public class SupplierDaoImpl implements SupplierDao
 		session.getTransaction().commit();
 	}
 	
+	public void updateSupplier(Supplier supp)
+	{
+		Session session= sessionFactory.openSession();
+		Transaction trans= session.beginTransaction();
+		session.update(supp);
+		trans.commit();
+		
+		/*session.saveOrUpdate(prod);
+		*/
+		
+		System.out.println("update method in daoimpl");
 	
+	}
 	
 }

@@ -142,7 +142,7 @@ private final static String DATABASE_URL = "jdbc:h2:tcp://localhost/~/BookDb";
 	@Autowired
 	@Bean(name="SupplierDaoImpl")
 	public SupplierDaoImpl saveSuppData(SessionFactory sf)
-	{	System.out.println("UserDaoImpl bean.......");
+	{	System.out.println("Suplier bean.......");
 		return new SupplierDaoImpl(sf);
 		
 	}

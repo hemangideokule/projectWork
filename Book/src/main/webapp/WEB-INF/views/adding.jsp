@@ -44,8 +44,15 @@
 	<span id="reauth-email" class="reauth-email"></span>
 	<h3 class ="input-title"> Supplier Id</h3><br>
 	<input class="form-control"  type="number" name="sid" required >
+	
 	<h3 class ="input-title"> Supplier name</h3><br>
 	<input class="form-control"  type="text" name="sname" required >
+	
+		<h3 class ="input-title"> Supplier address</h3><br>
+	<input class="form-control"  type="text" name="saddress" required >
+		
+	<h3 class ="input-title"> Supplier phone</h3><br>
+	<input class="form-control"  type="number" name="sphone" required >
 		<br>
 	<button class="btn btn-lg btn-primary" type="submit"> Save</button>
 	<button class="btn btn-lg btn-warning" type="reset"> Cancel</button>

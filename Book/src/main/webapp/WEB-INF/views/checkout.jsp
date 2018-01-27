@@ -31,7 +31,7 @@
 <form action="/orderProcess" method="post">
 <c:set var="gtot" value="0"></c:set>
 <c:forEach var="c" items="${cart}">
-<c:set var="gtot" value="${gtot+c.price*c.qty}"></c:set>
+<c:set var="gtot" value="${gtot+c.cartPrice*c.cartQuantity}"></c:set>
 
 </c:forEach>
 <div class="well">

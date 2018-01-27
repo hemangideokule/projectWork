@@ -36,7 +36,7 @@
 <td><c:out value="${p.cname }"></c:out></td>
 <td class="span4">
 <c:set var="contextRoot" value="${ pageContext.request.contextPath}/categoryList"></c:set>
-<a class="btn btn-info" role="button" href="${contextRoot }/admin/updateCat?cid= <c:out value="${p.cid }" ></c:out>" > Edit</a>
+<a class="btn btn-info" role="button" href="updateCat?cid=<c:out value="${p.cid }" ></c:out>" > Edit</a>
  
  
 <a class="btn btn-danger" role="button" href="<c:url value="/admin/deleteCat/${p.cid}"/>"> Delete</a></td>

@@ -24,6 +24,11 @@ public class Supplier implements Serializable
 	@Id
 	private int sid ;
 	private String supplierName;
+	private String address;
+    private String phone;
+	
+
+
 	private static final long serialVersionUID = 1L;
 	public int getSid() {
 		return sid;
@@ -38,7 +43,20 @@ public class Supplier implements Serializable
 		this.supplierName = supplierName;
 	}
 	
-	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	@OneToMany(targetEntity=Product.class, fetch=FetchType.EAGER ,mappedBy ="supplier")
 	private Set<Product> product= new HashSet<Product>(0);
 	

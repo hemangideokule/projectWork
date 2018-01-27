@@ -45,27 +45,28 @@ src="E:\cart.png" style="width:30%" height="30%"/>
 <tr>
 
 
- <td><c:out value="${p.pid}"></c:out></td> 
+ <td><c:out value="${p.cartId}"></c:out></td> 
 
- <td><c:out value="${p.prodName}"></c:out></td> 
+ <td><c:out value="${p.cartName}"></c:out></td> 
 
-<td><c:out value="${p.quantity}"></c:out></td>
-<td><c:out value="${p.price}"></c:out></td>
-<td><img src="${pageContext.request.contextPath }/resources/${p.imageName}" height="50px" width="50px"></td>
-<td><c:out value="${p.quantity * p.price}"></c:out></td>
+<td><c:out value="${p.cartQuantity}"></c:out></td>
+<td><c:out value="${p.cartPrice}"></c:out></td>
+<td><img src="${pageContext.request.contextPath }/resources/${p.cartImage}" height="50px" width="50px"></td>
+<td><c:out value="${p.cartQuantity * p.cartPrice}"></c:out></td>
 <td class="span 2">
 <c:set var="contextRoot" value="${ pageContext.request.contextPath}"></c:set>
 <a class="btn btn-danger" role="button" href="<c:url value="/deletePCart/${p.cartId}"/>"> Delete</a>
 </td>
 </tr>
-<c:set var="gtot" value="${ gtot+p.price*p.quantity}"></c:set>
+<c:set var="gtot" value="${ gtot+p.price*p.qty}"></c:set>
 
 </c:forEach>
 <td>
 <span class="col-lg-9" align="right"><label>Grand Total:</label><c:out value="${gtot}"/></span>
 </td>
-
+<br><br>
 <tfoot>
+
 <td>
 <a class="btn btn-warning btn-lg " href="${ pageContext.request.contextPath}/index">Continue Shopping</a>
 </td>

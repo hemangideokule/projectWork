@@ -19,12 +19,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.Dao.ProductDao;
 import com.DaoImpl.CategoryDaoImpl;
 import com.DaoImpl.ProductDaoImpl;
 import com.DaoImpl.SupplierDaoImpl;
 import com.model.Category;
 import com.model.Product;
 import com.model.Supplier;
+
+
 
 
 
@@ -39,6 +42,9 @@ public class AdminController {
 	
     @Autowired 
 	ProductDaoImpl productDaoImpl;
+	
+    @Autowired
+	ProductDao productDao;
     
 	@RequestMapping("/adding")
 	public String adding()
@@ -87,12 +93,14 @@ public class AdminController {
 	
 	@RequestMapping(value="/saveSupp" , method=RequestMethod.POST)
 	@Transactional
-	 public ModelAndView saveSuppData(@RequestParam("sid") int sid, @RequestParam("sname") String sname )
+	 public ModelAndView saveSuppData(@RequestParam("sid") int sid, @RequestParam("sname") String sname , @RequestParam("saddress") String saddress,@RequestParam("sphone") String  sphone)
 	{
 		ModelAndView mv= new ModelAndView();
 			Supplier ss= new Supplier();
 		    ss.setSid(sid);
 			ss.setSupplierName(sname);
+			ss.setAddress(saddress);
+			ss.setPhone(sphone);
 			supplierDaoImpl.insertSupplier(ss);
 			mv.setViewName("modal");
 			return mv;
@@ -155,11 +163,11 @@ public class AdminController {
 		
 	}
 	
-	@RequestMapping("/deleteProd/{cid}")
+	@RequestMapping("/deleteCat/{cid}")
 	public String deleteCat(@PathVariable("cid") int cid)
 	{
 	  categoryDaoImpl.deleteCat(cid);
-	  return "redirect:/admin/categoryList";
+	  return "deleteCatModal";
 		
 	}
 	@RequestMapping("/deleteSat/{sid}")
@@ -197,7 +205,35 @@ public class AdminController {
 		return mv;
 
 	}
+	@RequestMapping(value="/updateSupp")
+	public ModelAndView updateSupplier(@RequestParam("sid") int sid)
+	{
+		System.out.println("hi");
+		ModelAndView mv =new ModelAndView();
+		Supplier s=supplierDaoImpl.findBySuppId(sid);
+		/*List<Product> prod= productDaoImpl.findByProdId(pid);*/
+		mv.addObject("supp",s);
 	
+		mv.setViewName("UpdateSupplier");
+		System.out.println("hi3");
+		return mv;
+
+	}
+	@RequestMapping(value="/updateCat")
+	public ModelAndView updateCategory(@RequestParam("cid") int cid)
+	{
+		System.out.println("hi");
+		ModelAndView mv =new ModelAndView();
+	Category c=categoryDaoImpl.findByCatId(cid);
+		/*List<Product> prod= productDaoImpl.findByProdId(pid);*/
+		mv.addObject("cat",c);
+		mv.addObject("catList",categoryDaoImpl.retrieve());
+	
+		mv.setViewName("UpdateCategory");
+		System.out.println("hi3");
+		return mv;
+
+	}
 	
 	@RequestMapping(value="/productUpdate" , method=RequestMethod.POST)
 	public String updateProd(HttpServletRequest request, @RequestParam("file") MultipartFile file)
@@ -219,7 +255,9 @@ public class AdminController {
     String filepath= request.getSession().getServletContext().getRealPath("/");
     String filename= file.getOriginalFilename();
     prod.setImgName(filename);
-  productDaoImpl.updateProduct(prod);
+productDaoImpl.updateProduct(prod);
+    /*productDaoImpl.update(prod);*/
+  
   System.out.println("File path"+filepath);
   try 
   {
@@ -241,6 +279,51 @@ public class AdminController {
   return "updateModal";
   
 }
+	
+	@RequestMapping(value="/supplierUpdate" , method=RequestMethod.POST)
+	/*public String supplierUpdate(HttpServletRequest request)
+	*/
+	public String supplierUpdate(Supplier supplier, Model model)
+	
+	{
+		model.addAttribute("satList",this.supplierDaoImpl.retrieve());
+		 supplierDaoImpl.updateSupplier(supplier);
+		 return "updateModal";
+		 
+		/*System.out.println("update url");
+		int sid= request.getIntHeader("sid");
+		
+	Supplier supp=new Supplier();
+	supp.setSupplierName(request.getParameter("supplierName"));
+	supp.setAddress(request.getParameter("address"));
+	supp.setPhone(request.getParameter("phone"));
+*/
+		 /*return "redirect:/productList?updateProd";*/
+ 
+}
+	@RequestMapping(value="/categoryUpdate" , method=RequestMethod.POST)
+	public String categoryUpdate(HttpServletRequest request)
+	{
+		System.out.println("update url");
+		int cid= request.getIntHeader("cid");
+	Category cat=new Category();
+	cat.setCname(request.getParameter("cName"));
+
+
+	categoryDaoImpl.updateCategory(cat);
+
+ 
+
+
+	/*return "redirect:/productList?updateProd";*/
+  return "updateModal";
+  
+}
+	
+	
+	
+	
+	
 	
 	/* @RequestMapping(value="/prodDetails/${p.pid }")
 	    public ModelAndView prodDetails(@PathVariable("pid") int pid)

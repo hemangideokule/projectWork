@@ -96,7 +96,9 @@ public class CartController {
 						System.out.println("name="+prodName);
 						
 						User u=userDaoImpl.findUserByEmail(userEmail);
+						System.out.println("userMail="+userEmail);
 						cm.setCartUserDetails(u);
+						System.out.println("u="+u);
 				        cartDaoImpl.insertCart(cm);
 					}
 					

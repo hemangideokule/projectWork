@@ -19,41 +19,42 @@
 
 <body> 
 <jsp:include page="header.jsp"></jsp:include>
-<br><br>
-h2>Registration Form</h2>
+<br><br><br><br>
+<h2>Registration Form</h2>
 <div class="container">
-<
+
 	<div class="col-sm-8">
 		<div class="row">
 		
 		<form:form modelAttribute="user" action="saveRegister" method="post">
 			<div class="col-lg-12">
-			<div class="form-group">
-			<form:errors path="name" cssClass="err"/><br>
-		<label> Name :  </label>
-		<form:input path="name" class="form-control" placeholder= "Enter name"/>
+			
+		<div class="form-group">
+		<form:errors path="name" cssClass="err"/><br>
+		<label> Name :  </label><br>
+		<input name="name" class="form-control" placeholder= "Enter name"  required/>
 		</div>
 		
 		<div class="form-group">
-			<form:errors path="email" cssClass="err"/><br>
+		<form:errors path="email" cssClass="err"/><br>
 		<label> Email :  </label><br>
-		<form:input path="email" class="form-control" placeholder= "Enter Email"/>
+		<input name="email" class="form-control" placeholder= "Enter Email" required />
 		</div>
 		
 		<div class="form-group">
 		<label> Password :  </label><br>
-		<form:input path="password" class="form-control" placeholder= "Enter Password"/>
+		<input path="password" class="form-control" placeholder= "Enter Password" required />
 		</div>
 		
 		<div class="form-group">
 		<label> Address :  </label><br>
-		<form:input path="address" class="form-control" placeholder= "Enter Address"/>
+		<input name="address" class="form-control" placeholder= "Enter Address" required  />
 		</div>
 		
 		<div class="form-group">
 			<form:errors path="phone" cssClass="err"/><br>
 		<label> Phone No :  </label><br>
-		<form:input path="phone" class="form-control" placeholder= "Enter Phone"/>
+		<input name="phone" class="form-control" placeholder= "Enter Phone" required />
 		</div>
 		<br>
 		<br>

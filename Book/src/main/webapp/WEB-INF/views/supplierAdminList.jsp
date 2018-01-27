@@ -21,6 +21,9 @@
 <th> SI No</th>
 <th> SID </th>
 <th>Supplier Name</th>
+<th>Address</th>
+<th>Phone Number</th>
+
 <th class="span2"> Action</th>
 </tr>
 <c:if test="${empty satList }">
@@ -34,9 +37,12 @@
 <td><c:out value="${st.count }"></c:out></td>
 <td><c:out value="${p.sid}"></c:out></td>
 <td><c:out value="${p.supplierName }"></c:out></td>
+<td><c:out value="${p.address }"></c:out></td>
+<td><c:out value="${p.phone }"></c:out></td>
+
 <td class="span4">
 <c:set var="contextRoot" value="${ pageContext.request.contextPath}/supplierList"></c:set>
-<a class="btn btn-info" role="button" href="${contextRoot }/admin/updateSat?sid= <c:out value="${p.sid }" ></c:out>" > Edit</a>
+<a class="btn btn-info" role="button"  href="updateSupp?sid=<c:out value="${p.sid }" ></c:out>" > Edit</a>
  
  
 <a class="btn btn-danger" role="button" href="<c:url value="/admin/deleteSat/${p.sid}"/>"> Delete</a></td>

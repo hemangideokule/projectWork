@@ -30,8 +30,8 @@ public class User  implements Serializable
 	private String email;
 	private String role;
 	private String address;
-	@Pattern(regexp="[\\d] {10}", message="Enter Valid Digits")
-	@Size(min=8,max=10, message="Enter valid numbers for phone")
+/*	@Pattern(regexp="[\\d] {10}", message="Enter Valid Digits")*/
+	@Size(min=8,max=10, message="Enter 10 digits for phone")
 	private String phone;
 	private boolean enabled;
 	

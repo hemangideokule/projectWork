@@ -16,44 +16,16 @@
 
 </head>
 
-<body>
-<jsp:include page="header.jsp"></jsp:include>
+<body><%-- 
+<jsp:include page="header.jsp"></jsp:include> --%>
 <br><br><br><br>
 <div class="container">
-<c:url value="/productUpdate" var="pro"></c:url>
-<form method="post" action="productUpdate" enctype="multipart/form-data" >
+
+<c:url value="/categoryUpdate" var="pro"></c:url>
+<form method="post" action="categoryUpdate" enctype="multipart/form-data" >
 	<span id="reauth-email" class="reauth-email"></span>
-	<input type="hidden" name="pid" value="${prod.pid }">
-	
-	<h4 class ="input-title"> Product Name :	<input value="${prod.prodName}" type="text" name="pName" required/ >
-	 </h4>
-
-	<h4 class ="input-title"> Product Description :	<input value="${prod.description}"  type="text" name="pDescription" required /> </h4> <br> 
-
-	
-	<h4 class ="input-title"> Product Price :  	<input value="${prod.price}" type="number" name="pPrice" required/ ></h4>
-
-	
-	<h4 class ="input-title"> Product Stock :	<input value="${prod.stock}" type="number" name="pStock" required/ ></h4>
-
-	<br>
-<div class="form-group">
-		<table>
-		<tr>
-		   <td> Select Supplier</td>
-		   <td> 
-		   <select class="form-control" name="pSupplier" required/>
-		  <!--  <option value="">---Select Supplier---</option> -->
-		   
-		   <c:forEach items="${satList}" var="sat">
-            <option value="${sat.sid }">${sat.supplierName}</option>
-		   </c:forEach>
-		</select>
-	
-		</tr>
-		</table>
-	</div>
-	
+	<input type="hidden" name="cid" value="${cat.cid }">
+	<h4 class ="input-title">Choose To Update Category </h4>
 	<div class="form-group">
 		<table>
 		<tr>
@@ -70,16 +42,12 @@
 		</table>
 	</div>
 	
-	<div class="fileinput fileinput-new" data-provides="fileinput">
-	<td> Product Image</td>
-	<td><input class="form-control" type="file" name="file" accept="image/*"></td>
-
-	</div>
 	
 	
 	<br>
 	<button class="btn btn-lg btn-primary" type="submit"> Update</button>
 	<button class="btn btn-lg btn-warning" type="reset"> Cancel</button>
+	
 	
 	</form>
 </div>
