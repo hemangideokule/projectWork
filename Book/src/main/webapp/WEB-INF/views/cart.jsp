@@ -45,14 +45,14 @@ src="E:\cart.png" style="width:30%" height="30%"/>
 <tr>
 
 
- <td><c:out value="${p.cartId}"></c:out></td> 
+ <td><c:out value="${p.cartId}hh"></c:out></td> 
 
- <td><c:out value="${p.cartName}"></c:out></td> 
-
-<td><c:out value="${p.cartQuantity}"></c:out></td>
-<td><c:out value="${p.cartPrice}"></c:out></td>
-<td><img src="${pageContext.request.contextPath }/resources/${p.cartImage}" height="50px" width="50px"></td>
-<td><c:out value="${p.cartQuantity * p.cartPrice}"></c:out></td>
+ <td><c:out value="${p.prodName}hh"></c:out></td> 
+<%-- 
+<td><c:out value="${p.cartQuantity}"></c:out></td> --%>
+<td><c:out value="${p.price}hh"></c:out></td>
+<td><img src="${pageContext.request.contextPath }/resources/${p.imgName}" height="50px" width="50px"></td>
+<td><c:out value="${p.cartQuantity * p.price}"></c:out></td>
 <td class="span 2">
 <c:set var="contextRoot" value="${ pageContext.request.contextPath}"></c:set>
 <a class="btn btn-danger" role="button" href="<c:url value="/deletePCart/${p.cartId}"/>"> Delete</a>

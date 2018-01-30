@@ -77,6 +77,7 @@ public class CartController {
 				   int pid=Integer.parseInt(request.getParameter("pid"));
 				   System.out.println("pid="+pid);
 				   Double price=Double.parseDouble(request.getParameter("pPrice"));
+			/*	   int stock=Integer.parseInt(request.getParameter("stock"));*/
 				   int qty=Integer.parseInt(request.getParameter("pQty"));
 					String prodName=request.getParameter("pName");
 					String imgName=request.getParameter("imgName");
@@ -87,11 +88,17 @@ public class CartController {
 						System.out.println("cart==null");
 						Cart cm= new Cart();
 						cm.setCartProductId(pid);
-						System.out.println("pid"+pid);
+						System.out.println("pid="+pid);
 						cm.setCartPrice(price);
-						
-			            cm.setCartStock(qty);
+						System.out.println("price="+price);
+			         cm.setCartStock(qty);
+						System.out.println("qty="+qty);
+				/*		cm.setCartStock(stock);
+						System.out.println("stock="+stock);*/
+			/*			cm.setCartQuantity(qty);
+						System.out.println("qty="+qty);*/
 						cm.setCartImage(imgName);
+						System.out.println("imgName="+imgName);
 						cm.setCartProductName(prodName);
 						System.out.println("name="+prodName);
 						
@@ -144,6 +151,8 @@ public class CartController {
 			System.out.println(userEmail+"user mail....");
 			 List<Cart> cart=cartDaoImpl.findCartById(userEmail);
 			 mv.addObject("user",u);
+				System.out.println("u="+u);
+			 
 			 mv.addObject("cart",cart);
 			 
 		return mv;

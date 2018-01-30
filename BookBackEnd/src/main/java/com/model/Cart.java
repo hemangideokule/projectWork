@@ -37,7 +37,7 @@ public Cart()
 {}
 
 
-public Cart(int cartId, int cartProductId, User cartUserDetails, Double cartPrice, int cartStock, String cartProductName, int cartQuantity)
+public Cart(int cartId, int cartProductId, User cartUserDetails, Double cartPrice, int cartStock, String cartProductName)
 {
 this.cartId=cartId;
 //this.cartImage=cartImage;
@@ -46,7 +46,7 @@ this.cartProductId=cartProductId;
 this.cartProductName=cartProductName;
 this.cartUserDetails=cartUserDetails;
 this.cartStock=cartStock;
-this.cartQuantity=cartQuantity;
+
 
 	
 }

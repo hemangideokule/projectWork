@@ -3,6 +3,7 @@ package com.DaoImpl;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.transaction.annotation.Transactional;
 //import org.springframework.stereotype.Repository;
@@ -35,20 +36,29 @@ public class UserDaoImpl implements UserDao
 		session.getTransaction().commit();
 	}
 	
-	public User findUserByEmail(String email)
+	public User findUserByEmail(String userEmail)
 	{
-		System.out.println("USERMAILID");
+		/*System.out.println("USERMAILID");
 		Session session= sessionFactory.openSession();
 		User u= null;
-		try {
-		session.beginTransaction();
+		try {*/
+/*
+			Session session= sessionFactory.openSession();*/
+		/*	Transaction trans= session.beginTransaction();
+			session.get(User.class, email);
+			trans.commit();*/
+		/*session.beginTransaction();
 		u=session.get(User.class, email);
-		session.getTransaction().commit();
-		}
+		session.getTransaction().commit();*/
+		/*}
 		catch(HibernateException e)
 		{e.printStackTrace();}
-		return u;
-	
+		return u*/;
+Session session=sessionFactory.openSession();
+		
+		User user=session.get(User.class,userEmail);
+		System.out.println("email in userImpl="+userEmail);
+		return user;
 	
 	}
 	

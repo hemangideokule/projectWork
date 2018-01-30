@@ -3,6 +3,7 @@ package com.DaoImpl;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,13 @@ public class CartDaoImpl implements CartDao
 	@SuppressWarnings("unchecked")
 	public List<Cart> findCartById(String userId)
 	{
-		Session session= sessionFactory.openSession();
+		Session session=sessionFactory.openSession();
+		Query query=session.createQuery("from Cart where usermailId=:email ");
+		query.setParameter("email",userId);
+		
+		List<Cart> list=query.list();
+		return list;
+		/*Session session= sessionFactory.openSession();
 	    List<Cart> cr=null;
 		try
 		
@@ -72,7 +79,7 @@ public class CartDaoImpl implements CartDao
 			session.getTransaction().rollback();
 			
 		}
-		return cr;
+		return cr;*/
 	}
 
 	public Cart getCartById(int cartProductId, String userEmail)

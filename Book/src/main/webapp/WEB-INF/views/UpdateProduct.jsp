@@ -25,16 +25,16 @@
 	<span id="reauth-email" class="reauth-email"></span>
 	<input type="hidden" name="pid" value="${prod.pid }">
 	
-	<h4 class ="input-title"> Product Name :	<input value="${prod.prodName}" type="text" name="pName" required/ >
+	<h4 class ="input-title"> Product Name :	<input value="${prod.prodName}" type="text" name="prodName" required/ >
 	 </h4>
 
-	<h4 class ="input-title"> Product Description :	<input value="${prod.description}"  type="text" name="pDescription" required /> </h4> <br> 
+	<h4 class ="input-title"> Product Description :	<input value="${prod.description}"  type="text" name="description" required /> </h4> <br> 
 
 	
-	<h4 class ="input-title"> Product Price :  	<input value="${prod.price}" type="number" name="pPrice" required/ ></h4>
+	<h4 class ="input-title"> Product Price :  	<input value="${prod.price}" type="number" name="price" required/ ></h4>
 
 	
-	<h4 class ="input-title"> Product Stock :	<input value="${prod.stock}" type="number" name="pStock" required/ ></h4>
+	<h4 class ="input-title"> Product Stock :	<input value="${prod.stock}" type="number" name="stock" required/ ></h4>
 
 	<br>
 <div class="form-group">
@@ -42,7 +42,7 @@
 		<tr>
 		   <td> Select Supplier</td>
 		   <td> 
-		   <select class="form-control" name="pSupplier" required/>
+		   <select class="form-control" name="sid" required/>
 		  <!--  <option value="">---Select Supplier---</option> -->
 		   
 		   <c:forEach items="${satList}" var="sat">
@@ -59,7 +59,7 @@
 		<tr>
 		   <td> Select Category</td>
 		   <td> 
-		   <select class="form-control" name="pCategory" required/>
+		   <select class="form-control" name="cid" required/>
 		 <!--   <option value="">---Select Category---</option> -->
 		   
 		   <c:forEach items="${catList}" var="cat">

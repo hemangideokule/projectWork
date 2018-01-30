@@ -235,7 +235,7 @@ public class AdminController {
 
 	}
 	
-	@RequestMapping(value="/productUpdate" , method=RequestMethod.POST)
+	/*@RequestMapping(value="/productUpdate" , method=RequestMethod.POST)
 	public String updateProd(HttpServletRequest request, @RequestParam("file") MultipartFile file)
 	{
 		System.out.println("update url");
@@ -256,7 +256,7 @@ public class AdminController {
     String filename= file.getOriginalFilename();
     prod.setImgName(filename);
 productDaoImpl.updateProduct(prod);
-    /*productDaoImpl.update(prod);*/
+    productDaoImpl.update(prod);
   
   System.out.println("File path"+filepath);
   try 
@@ -270,15 +270,15 @@ productDaoImpl.updateProduct(prod);
 	 catch(IOException e)
   {
 		 
-		/* e.printStackTrace();*/
+		 e.printStackTrace();
   e.getMessage();
   }
 
 
-	/*return "redirect:/productList?updateProd";*/
+	return "redirect:/productList?updateProd";
   return "updateModal";
   
-}
+}*/
 	
 	@RequestMapping(value="/supplierUpdate" , method=RequestMethod.POST)
 	/*public String supplierUpdate(HttpServletRequest request)
@@ -301,7 +301,21 @@ productDaoImpl.updateProduct(prod);
 		 /*return "redirect:/productList?updateProd";*/
  
 }
-	@RequestMapping(value="/categoryUpdate" , method=RequestMethod.POST)
+	
+	@RequestMapping(value="/productUpdate",method=RequestMethod.POST)
+	public String updateProduct(Product product,Model model)
+	{
+		productDaoImpl.updateProduct(product);
+		model.addAttribute("prodList",this.productDaoImpl.retrieve());
+		return "updateModal";
+	}
+		
+	
+	
+	
+	
+	
+	/*@RequestMapping(value="/categoryUpdate" , method=RequestMethod.POST)
 	public String categoryUpdate(HttpServletRequest request)
 	{
 		System.out.println("update url");
@@ -315,10 +329,10 @@ productDaoImpl.updateProduct(prod);
  
 
 
-	/*return "redirect:/productList?updateProd";*/
+	return "redirect:/productList?updateProd";
   return "updateModal";
   
-}
+}*/
 	
 	
 	
