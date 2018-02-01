@@ -7,15 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
-
-
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.Dao.CartItemDao;
 import com.DaoImpl.CartDaoImpl;
 import com.DaoImpl.CategoryDaoImpl;
 import com.DaoImpl.OrdersDaoImpl;
@@ -23,12 +22,16 @@ import com.DaoImpl.ProductDaoImpl;
 import com.DaoImpl.SupplierDaoImpl;
 import com.DaoImpl.UserDaoImpl;
 import com.model.Cart;
+import com.model.CartItem;
 import com.model.Orders;
 import com.model.Product;
 
 import com.model.User;
 
+
+
 @Controller
+@RequestMapping("/cart")
 public class CartController {
 	
 	 @Autowired 
@@ -48,8 +51,35 @@ public class CartController {
 		
 	    @Autowired 
 		UserDaoImpl userDaoImpl;
-	    
-	   @RequestMapping(value="/prodDetails/{pid}")
+		@Autowired
+		private CartItemDao cartItemDao;
+		
+		private User user;
+		CartItem cartItem = new CartItem();
+		
+		@RequestMapping(value = "/goToCart")
+		public String userviewcart(Principal principal, Model model) {
+
+			if (principal != null) {
+				//user = UserDaoImpl.getUserByUserName(principal.getName());
+				user = userDaoImpl.getUserByUserName(principal.getName());
+				if (user.getRole().equals("ROLE_ADMIN"))
+				/*	return "redirect:/admin/show/product";
+				*/
+					return "redirect:/admin/productList";
+				
+
+			}
+
+			model.addAttribute("title", "View Cart");
+
+			model.addAttribute("cartitemlist", (user.getCart()).getCartItem());
+
+			model.addAttribute("userClickViewCart", true);
+			return "index";
+		}
+		
+		@RequestMapping(value="/prodDetails/{pid}")
 	    public ModelAndView prodDet(@PathVariable("pid") int pid)
 		{System.out.println("hi");
 		ModelAndView mv= new ModelAndView();
@@ -85,7 +115,7 @@ public class CartController {
 					Cart cartExist = cartDaoImpl.getCartById(pid, userEmail);
 					if(cartExist==null)
 					{
-						System.out.println("cart==null");
+						/*System.out.println("cart==null");
 						Cart cm= new Cart();
 						cm.setCartProductId(pid);
 						System.out.println("pid="+pid);
@@ -93,10 +123,10 @@ public class CartController {
 						System.out.println("price="+price);
 			         cm.setCartStock(qty);
 						System.out.println("qty="+qty);
-				/*		cm.setCartStock(stock);
-						System.out.println("stock="+stock);*/
-			/*			cm.setCartQuantity(qty);
-						System.out.println("qty="+qty);*/
+						cm.setCartStock(stock);
+						System.out.println("stock="+stock);
+						cm.setCartQuantity(qty);
+						System.out.println("qty="+qty);
 						cm.setCartImage(imgName);
 						System.out.println("imgName="+imgName);
 						cm.setCartProductName(prodName);
@@ -122,7 +152,7 @@ public class CartController {
 						
 						User u=userDaoImpl.findUserByEmail(userEmail);
 						cm.setCartUserDetails(u);
-				cartDaoImpl.updateCart(cm);
+				cartDaoImpl.updateCart(cm);*/
 					}
 					
 			mv.addObject("cartInfo",cartDaoImpl.findCartById(userEmail));
@@ -220,7 +250,7 @@ return "ack";
 }
 
 
-@RequestMapping(value="/goToCart" , method=RequestMethod.GET)
+/*@RequestMapping(value="/goToCart" , method=RequestMethod.GET)
 public ModelAndView gotocart( HttpServletRequest req)
 { 
 ModelAndView mv= new ModelAndView();
@@ -231,7 +261,7 @@ mv.addObject("cartInfo", cartDaoImpl.findCartById(userEmail));
  
 return mv;
 
-}
+}*/
 
 @RequestMapping(value="/deletePCart/{cartId}")
 public ModelAndView deletecartItem(@PathVariable("cardId") int cartId,HttpServletRequest req)
@@ -246,6 +276,26 @@ return mv;
 	
 }
 
+/*@RequestMapping("/{pid}")		
+public String addscart( @PathVariable("pid")int id,@RequestParam("quantity") int quantity,HttpSession session,Model model,Cart cart)
+{		
+		
+	String username=(String)session.getAttribute("username");
+	Product product1=productdao.findByProdId();
+	cart.setUsername(username); 
+	cart.setProquantity(quantity);
+	Product product=productdao.getProduct(id);
+cart.setProid(product.getId());
+cart.setProname(product.getName());
+cart.setProprize(product.getPrize());
+cart.setCatid(product.getCatId());
 
+cart.setSupid(product.getSupId());
+cart.setOrdered(false);
+model.addAttribute("cart",new Cart());
+cartdao.insert(cart);
+model.addAttribute("prolist",this.productdao.retreive());
+return "allproductdisplay";
+}*/
 
 }

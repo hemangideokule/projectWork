@@ -1,11 +1,17 @@
 package com.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 
 import org.springframework.stereotype.Component;
 
-import org.springframework.web.multipart.MultipartFile;
+
+
+
+
 
 @Component
 @Entity
@@ -17,119 +23,55 @@ public class Cart  implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 
-@Id
-@GeneratedValue 
-private int cartId;
-
-private int cartProductId;
-@OneToOne(fetch=FetchType.LAZY)
-@JoinColumn(name="userMailId")
-
-private User cartUserDetails;
-private double cartPrice;
-private int cartStock;
-private String cartImage;
-private String cartProductName;
-private int cartQuantity;
-
-
-public Cart()
-{}
-
-
-public Cart(int cartId, int cartProductId, User cartUserDetails, Double cartPrice, int cartStock, String cartProductName)
-{
-this.cartId=cartId;
-//this.cartImage=cartImage;
-this.cartPrice=cartPrice;
-this.cartProductId=cartProductId;
-this.cartProductName=cartProductName;
-this.cartUserDetails=cartUserDetails;
-this.cartStock=cartStock;
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int cartId;
+	private int totalItems;
+	private double grandTotal;
+	
+	@OneToOne(cascade = CascadeType.PERSIST)
+	private User user;
+	
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinColumn(name="id")
+	private Set<CartItem> cartItem=new HashSet<CartItem>();
 
 	
-}
+	public int getCartId() {
+		return cartId;
+	}
+	public void setCartId(int cartId) {
+		this.cartId = cartId;
+	}
+	public int getTotalItems() {
+		return totalItems;
+	}
+	public void setTotalItems(int totalItems) {
+		this.totalItems = totalItems;
+	}
+	public double getGrandTotal() {
+		return grandTotal;
+	}
+	public void setGrandTotal(double grandTotal) {
+		this.grandTotal = grandTotal;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Set<CartItem> getCartItem() {
+		return cartItem;
+	}
+	public void setCartItem(Set<CartItem> cartItem) {
+		this.cartItem = cartItem;
+	}
 
-
-public int getCartId() {
-	return cartId;
-}
-
-
-public void setCartId(int cartId) {
-	this.cartId = cartId;
-}
-
-
-public int getCartProductId() {
-	return cartProductId;
-}
-
-
-public void setCartProductId(int cartProductId) {
-	this.cartProductId = cartProductId;
-}
-
-
-public User getCartUserDetails() {
-	return cartUserDetails;
-}
-
-
-public void setCartUserDetails(User cartUserDetails) {
-	this.cartUserDetails = cartUserDetails;
-}
-
-
-public double getCartPrice() {
-	return cartPrice;
-}
-
-
-public void setCartPrice(double cartPrice) {
-	this.cartPrice = cartPrice;
-}
-
-
-public int getCartStock() {
-	return cartStock;
-}
-
-
-public void setCartStock(int cartStock) {
-	this.cartStock = cartStock;
-}
-
-
-public String getCartImage() {
-	return cartImage;
-}
-
-
-public void setCartImage(String cartImage) {
-	this.cartImage = cartImage;
-}
-
-
-public String getCartProductName() {
-	return cartProductName;
-}
-
-
-public void setCartProductName(String cartProductName) {
-	this.cartProductName = cartProductName;
-}
-
-
-public int getCartQuantity() {
-	return cartQuantity;
-}
-
-
-public void setCartQuantity(int cartQuantity) {
-	this.cartQuantity = cartQuantity;
-}
+	@Override
+	public String toString() {
+		return "Cart [cartId=" + cartId + ", totalItems=" + totalItems + ", grandTotal=" + grandTotal +"]";
+	}
 
 
 }

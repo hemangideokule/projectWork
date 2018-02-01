@@ -24,6 +24,7 @@ import com.DaoImpl.ProductDaoImpl;
 import com.DaoImpl.SupplierDaoImpl;
 import com.DaoImpl.UserDaoImpl;
 import com.model.Cart;
+import com.model.CartItem;
 import com.model.Category;
 import com.model.Orders;
 import com.model.Product;
@@ -123,6 +124,8 @@ private final static String DATABASE_URL = "jdbc:h2:tcp://localhost/~/BookDb";
 		lsfb.addAnnotatedClass(Product.class);
 		lsfb.addAnnotatedClass(Cart.class);
 		lsfb.addAnnotatedClass(Orders.class);
+		lsfb.addAnnotatedClass(CartItem.class);
+		
 		
 		
 		//lsfb.scanPackages("com.User");
@@ -178,7 +181,13 @@ private final static String DATABASE_URL = "jdbc:h2:tcp://localhost/~/BookDb";
 		
 	}
 	
-	
+	@Autowired
+	@Bean(name="CartItemDaoImpl")
+	public CartDaoImpl saveCartItemData(SessionFactory sf)
+	{	System.out.println("CartItem bean.......");
+		return new CartDaoImpl(sf);
+		
+	}
 	
 	
 	@Autowired
