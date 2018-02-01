@@ -37,12 +37,14 @@ public class User  implements Serializable
 	@Size(min=8,max=10, message="Enter 10 digits for phone")
 	private String phone;
 	private boolean enabled;
-	@OneToOne(/*cascade = CascadeType.ALL, mappedBy = "user",*/ fetch = FetchType.EAGER)
-	@JoinColumn(name="cartId")
-	private Cart cart;
+	
+
 	
 	
 	
+public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 public Cart getCart() {
 		return cart;
 	}
@@ -91,5 +93,9 @@ public String getName() {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-
+	
+	
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
+/*	@JoinColumn(name="cartId")*/
+	private Cart cart;
 }

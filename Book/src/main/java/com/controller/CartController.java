@@ -51,8 +51,7 @@ public class CartController {
 		
 	    @Autowired 
 		UserDaoImpl userDaoImpl;
-		@Autowired
-		private CartItemDao cartItemDao;
+	
 		
 		private User user;
 		CartItem cartItem = new CartItem();

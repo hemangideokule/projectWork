@@ -110,7 +110,7 @@ public class Product implements Serializable
 	private Supplier supplier;
 	
 	@OneToMany(targetEntity=CartItem.class, fetch=FetchType.EAGER ,mappedBy ="product")
-	private Set<CartItem> cartItem= new HashSet<CartItem>(0);
+	private Set<CartItem> cartItem= new HashSet<CartItem>();
 	
 	
 	

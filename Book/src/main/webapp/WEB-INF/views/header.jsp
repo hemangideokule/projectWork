@@ -29,9 +29,9 @@
           <li><a href="${pageContext.request.contextPath }/productList">Product List</a></li>
       <li><a href="${ pageContext.request.contextPath}/admin/adding">Admin</a></li>
 	      <li class="dropdown">
-	      <a class="dropdown-toggle" data-toggle="dropdown" 
+	      <a class="dropdown-hover" data-hover="dropdown" 
 	      href="#">Admin List<span class="caret"></span></a>
-	      <ul class="dropdown-menu">
+	      <ul class="dropdown-content">
 	         <li><a href="${ pageContext.request.contextPath}/admin/categoryList"> Category</a></li>
 	            <li><a href="${ pageContext.request.contextPath}/admin/supplierList"> Supplier</a></li>
 	             <li><a href="${ pageContext.request.contextPath}/admin/productList">Product</a></li> 
@@ -46,9 +46,9 @@
         <li><a href="${pageContext.request.contextPath }/onlyProductCustList">Product List</a></li>
        </security:authorize> 
  <li class="dropdown">
- <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+ <a class="dropdown-hover" data-hover="dropdown" href="#">
  Category Choice<span class="caret"></span></a>
-     <ul class="dropdown-menu">
+     <ul class="dropdown-content">
      <c:forEach var="catVal" items="${catList }">
 	           <li><a href="productCustList?cid=${catVal.cid}">${catVal.cname}</a></li>
 	  </c:forEach>

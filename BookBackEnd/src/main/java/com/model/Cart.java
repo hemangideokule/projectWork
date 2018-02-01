@@ -9,10 +9,6 @@ import javax.persistence.*;
 import org.springframework.stereotype.Component;
 
 
-
-
-
-
 @Component
 @Entity
 public class Cart  implements Serializable
@@ -29,14 +25,25 @@ public class Cart  implements Serializable
 	private int totalItems;
 	private double grandTotal;
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
+	
+    @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@JoinColumn(name="email")
 	private User user;
 	
-	@OneToMany(fetch=FetchType.EAGER)
+/*	@OneToOne(cascade = CascadeType.PERSIST,fetch=FetchType.EAGER)
+	private User user;*/
+	
+	@OneToMany(targetEntity=CartItem.class,fetch=FetchType.EAGER,mappedBy="cart")
 	@JoinColumn(name="id")
 	private Set<CartItem> cartItem=new HashSet<CartItem>();
 
-	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Cart()
+	{System.out.println("cart constructor");}
+
 	public int getCartId() {
 		return cartId;
 	}
