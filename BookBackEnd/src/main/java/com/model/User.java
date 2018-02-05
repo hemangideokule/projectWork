@@ -39,7 +39,7 @@ public class User  implements Serializable
 		this.id = id;
 	}
 
-/*	@NotNull*/
+	@NotNull
 	private String password;
 	@NotNull
 	private String name;

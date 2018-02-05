@@ -7,14 +7,14 @@ import javax.persistence.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+/*import org.springframework.transaction.annotation.Transactional;*/
 
 import com.Dao.CartItemDao;
 import com.model.CartItem;
 
 
-@Transactional
-@Repository/*("CartItemDao")*/
+/*@Transactional*/
+@Repository/*("CartItemDaoImpl")*/
 public class CartItemDaoImpl implements CartItemDao
 
 {
@@ -46,7 +46,7 @@ public class CartItemDaoImpl implements CartItemDao
 			return false;
 		}
 	}
-	public boolean update(CartItem cartItem) {
+	public boolean updateCartItem(CartItem cartItem) {
 		try {
 			// adding category to datbase
 			sessionFactory.getCurrentSession().update(cartItem);
@@ -71,25 +71,25 @@ public class CartItemDaoImpl implements CartItemDao
 		return (CartItem) sessionFactory.getCurrentSession().createQuery("from CartItem where userid =: userId").setParameter("user", userId).getSingleResult();
 	}
 
-	public CartItem getCartByUserIdAndProduct(int userId, int productId) {
+	public CartItem getCartByUserIdAndProduct(int userId, int pid) {
 
-		return (CartItem) sessionFactory.getCurrentSession().createQuery("FROM CartItem  WHERE userid=: userId and productid=: productId").getResultList();
+		return (CartItem) sessionFactory.getCurrentSession().createQuery("FROM CartItem  WHERE userid=:userId and pid=:pid").getResultList();
 	}
 
-	public void delete(int cartid, int productid) {
+	public void delete(int cartid, int pid) {
 		// TODO Auto-generated method stub
 		Query q=sessionFactory.getCurrentSession().createQuery("delete CartItem where cart_id=:cartid and product_id=:proid");
 		q.setParameter("cartid", cartid);
-		q.setParameter("proid", productid);
+		q.setParameter("proid", pid);
 		q.executeUpdate();
 	}
 
-	public CartItem getCartItemByCartIdAndProductId(int cartid, int productid) {
+	public CartItem getCartItemByCartIdAndProductId(int cartid, int pid) {
 		// TODO Auto-generated method stub
 		try{
-		Query q=sessionFactory.getCurrentSession().createQuery("From CartItem where cart_id=:cartid and product_id=:proid");
+		Query q=sessionFactory.getCurrentSession().createQuery("From CartItem where cartId=:cartid and pid=:proid");
 		q.setParameter("cartid", cartid);
-		q.setParameter("proid", productid);
+		q.setParameter("proid", pid);
 		
 		return (CartItem)q.getSingleResult();
 		}catch(Exception e)

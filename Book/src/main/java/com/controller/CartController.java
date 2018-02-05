@@ -1,7 +1,9 @@
 package com.controller;
 
 import java.security.Principal;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import com.Dao.CartItemDao;
 import com.DaoImpl.CartDaoImpl;
+import com.DaoImpl.CartItemDaoImpl;
 import com.DaoImpl.CategoryDaoImpl;
 import com.DaoImpl.OrdersDaoImpl;
 import com.DaoImpl.ProductDaoImpl;
@@ -51,6 +53,10 @@ public class CartController {
 		
 	    @Autowired 
 		UserDaoImpl userDaoImpl;
+	     
+	    @Autowired 
+		CartItemDaoImpl cartItemDaoImpl;
+		
 	
 		
 		private User user;
@@ -78,24 +84,59 @@ public class CartController {
 			return "index";
 		}
 		
-		@RequestMapping(value="/prodDetails/{pid}")
+	/*	@RequestMapping(value="/prodDetails/{pid}")
 	    public ModelAndView prodDet(@PathVariable("pid") int pid)
 		{System.out.println("hi");
 		ModelAndView mv= new ModelAndView();
 			Product p= productDaoImpl.findByProdId(pid);
-		/*List<Product> prod= productDaoImpl.findByProdId(pid);*/
+		List<Product> prod= productDaoImpl.findByProdId(pid);
 		mv.addObject("prod",p);
 		System.out.println("hi too");
           mv.setViewName("productDetails");
       	System.out.println("bye");
 		return mv;
 		}
-	    
+	*/    
 	    
 	    @RequestMapping(value="/addToCart" , method=RequestMethod.POST)
-	    public ModelAndView addToCart( HttpServletRequest request)
+	  /*  public ModelAndView addToCart( HttpServletRequest request)*/
+	    public String useraddproducttocart(@PathVariable("pid") int pid, Principal principal, Model model)
 		{
-	    	System.out.println("add to cart");
+	    	System.out.println("pid="+pid);
+	    	Product product = productDaoImpl.get(pid);
+			User user = userDaoImpl.getUserByUserName(principal.getName());
+			System.out.println("user="+user);
+			Cart cart = user.getCart();
+			System.out.println("cart="+cart);
+			
+			CartItem cartItem = cartItemDaoImpl.getCartItemByCartIdAndProductId(cart.getCartId(), product.getPid());
+			Set<CartItem> cartItems = null;
+			if (cartItem == null) {
+				
+				cartItem = new CartItem();
+				cartItem.setCart(cart);
+				cartItem.setProduct(product);
+				cartItem.setQuantity(1);
+				cartItem.setTotalPrice(product.getPrice());
+				cart.setGrandTotal(cart.getGrandTotal() + product.getPrice());
+				cart.setTotalItems(cart.getTotalItems() + 1);
+				cartItems = new HashSet<CartItem>();
+				cartItems.add(cartItem);
+				cart.setCartItem(cartItems);
+				cartDaoImpl.updateCart(cart);
+				
+			} else {
+				System.out.println("entering into else");
+				cartItem.setQuantity(cartItem.getQuantity() + 1);
+				cartItem.setTotalPrice(cartItem.getTotalPrice() + product.getPrice());
+				cartItem.getCart().setGrandTotal(cart.getGrandTotal() + product.getPrice());
+				cartItem.getCart().setTotalItems(cart.getTotalItems() + 1);
+				cartItemDaoImpl.updateCartItem(cartItem);
+			}
+
+
+			return "redirect:/goToCart";
+			/*ystem.out.println("add to cart");
 			ModelAndView mv= new ModelAndView();
 			
 			Principal principal=request.getUserPrincipal();
@@ -106,7 +147,7 @@ public class CartController {
 				   int pid=Integer.parseInt(request.getParameter("pid"));
 				   System.out.println("pid="+pid);
 				   Double price=Double.parseDouble(request.getParameter("pPrice"));
-			/*	   int stock=Integer.parseInt(request.getParameter("stock"));*/
+				   int stock=Integer.parseInt(request.getParameter("stock"));
 				   int qty=Integer.parseInt(request.getParameter("pQty"));
 					String prodName=request.getParameter("pName");
 					String imgName=request.getParameter("imgName");
@@ -114,7 +155,7 @@ public class CartController {
 					Cart cartExist = cartDaoImpl.getCartById(pid, userEmail);
 					if(cartExist==null)
 					{
-						/*System.out.println("cart==null");
+						System.out.println("cart==null");
 						Cart cm= new Cart();
 						cm.setCartProductId(pid);
 						System.out.println("pid="+pid);
@@ -151,7 +192,7 @@ public class CartController {
 						
 						User u=userDaoImpl.findUserByEmail(userEmail);
 						cm.setCartUserDetails(u);
-				cartDaoImpl.updateCart(cm);*/
+				cartDaoImpl.updateCart(cm);
 					}
 					
 			mv.addObject("cartInfo",cartDaoImpl.findCartById(userEmail));
@@ -166,7 +207,8 @@ public class CartController {
 				   mv.setViewName("cart");
 				   return mv;
 				   
-			   }
+			   }*/
+			   
 		}
 
 	    

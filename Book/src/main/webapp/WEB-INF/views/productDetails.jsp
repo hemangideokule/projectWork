@@ -17,13 +17,18 @@
 <div class="container">
 <div class="row">
 <div class="col-sm-4 item-photo">
+<br>
+<br>
 <img style="max-width:100%"; margin-top:30px;"
-src="${pageContext.request.contextPath }/resources/${prod.imgName}"/>
+src="C:\Users\Hemangi\eclipse-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\Book\resources/${prod.imgName}
+<%-- C:\Users\Hemangi\eclipse-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\Book\resources/${prod.imgName} --%>"/>
 </div>
 
 <div class="col-sm-5" style="border:0px solid gray">
 <br>
 <br>
+<br>
+
 <h3>${prod.prodName }</h3>
 <h4>${prod.description }</h4>
 <h4>Rs. ${prod.price }</h4>
@@ -37,8 +42,8 @@ src="${pageContext.request.contextPath }/resources/${prod.imgName}"/>
 <input type="hidden"  value="${prod.price }" name="pPrice"/>
 <input type="hidden"  value="${prod.prodName }" name="pName"/>
 <input type="hidden"  value="${prod.imgName }" name="imgName"/>
-<label>Quantity</label>
-<input type="number" class="form-control" name="pQty" required/><br><br>
+<!-- <label>Quantity</label>
+<input type="number" class="form-control" name="pQty" required/><br><br> -->
 
 <input class="btn btn-warning btn-lg" type="submit" value="Add To Cart" >
 <h6><span class="glyphicon glyphicon-heart" style="cursor:pointer;color:red; size:50px"></span>Wish List</h6>

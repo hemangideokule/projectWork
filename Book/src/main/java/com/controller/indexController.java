@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import com.DaoImpl.CategoryDaoImpl;
 import com.DaoImpl.ProductDaoImpl;
 import com.DaoImpl.SupplierDaoImpl;
 import com.DaoImpl.UserDaoImpl;
+import com.model.Product;
 import com.model.User;
 
 @Controller
@@ -134,7 +136,19 @@ return "index";
 		return mv;
 	
 	}
-	 
+	@RequestMapping("/prodDetails/{pid}")
+    public ModelAndView prodDet(@PathVariable("pid") int pid)
+	{System.out.println("hi");
+	ModelAndView mv= new ModelAndView();
+		Product p= productDaoImpl.findByProdId(pid);
+	/*List<Product> prod= productDaoImpl.findByProdId(pid);*/
+	mv.addObject("prod",p);
+	System.out.println("hi too");
+      mv.setViewName("productDetails");
+  	System.out.println("bye");
+	return mv;
+	}
+
 	
 
 
