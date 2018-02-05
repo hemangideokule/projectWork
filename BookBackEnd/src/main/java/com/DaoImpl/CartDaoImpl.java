@@ -13,7 +13,7 @@ import com.Dao.CartDao;
 import com.model.Cart;
 
 
-@Repository("CartDaoImpl")
+@Repository/*("CartDaoImpl")*/
 
 public class CartDaoImpl implements CartDao
 

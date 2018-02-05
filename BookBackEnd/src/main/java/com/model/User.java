@@ -5,14 +5,17 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
-
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.stereotype.Component;
 
 
@@ -26,6 +29,17 @@ public class User  implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+
+/*	@NotNull*/
 	private String password;
 	@NotNull
 	private String name;
@@ -33,7 +47,7 @@ public class User  implements Serializable
 	private String email;
 	private String role;
 	private String address;
-/*	@Pattern(regexp="[\\d] {10}", message="Enter Valid Digits")*/
+	@Pattern(regexp="[\\d]{10}", message="Enter Valid Digits")
 	@Size(min=8,max=10, message="Enter 10 digits for phone")
 	private String phone;
 	private boolean enabled;
@@ -96,6 +110,6 @@ public String getName() {
 	
 	
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
-/*	@JoinColumn(name="cartId")*/
+	@JoinColumn(name="cartId")
 	private Cart cart;
 }

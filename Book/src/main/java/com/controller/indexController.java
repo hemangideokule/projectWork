@@ -62,12 +62,16 @@ return "index";
 		ModelAndView mav= new ModelAndView();
 	if(result.hasErrors())
 	{
-			
+
+		System.out.println("result="+result);
+	
+			System.out.println("hasErrors");
 			mav.setViewName("register");
 		return mav;
 	}
 	else
 	{
+		System.out.println("noErrors");
 		user.setRole("ROLE_USER");
 		userDaoImpl.insertUser(user);
 		mav.setViewName("index");

@@ -14,12 +14,18 @@ import com.model.CartItem;
 
 
 @Transactional
-@Repository("CartItemDao")
+@Repository/*("CartItemDao")*/
 public class CartItemDaoImpl implements CartItemDao
 
 {
 	@Autowired
 	private SessionFactory sessionFactory;
+	@Autowired
+	public CartItemDaoImpl(SessionFactory sessionFactory)
+	{
+		super();
+		this.sessionFactory=sessionFactory;
+	}
 
 	public CartItem get(int id) {
 		return sessionFactory.getCurrentSession().get(CartItem.class, Integer.valueOf(id));

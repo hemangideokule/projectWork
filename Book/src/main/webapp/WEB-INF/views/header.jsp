@@ -28,6 +28,7 @@
       <security:authorize access="hasRole('ROLE_ADMIN')">
           <li><a href="${pageContext.request.contextPath }/productList">Product List</a></li>
       <li><a href="${ pageContext.request.contextPath}/admin/adding">Admin</a></li>
+      
 	      <li class="dropdown">
 	      <a class="dropdown-hover" data-hover="dropdown" 
 	      href="#">Admin List<span class="caret"></span></a>

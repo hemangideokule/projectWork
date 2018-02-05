@@ -34,6 +34,12 @@ public class UserDaoImpl implements UserDao
 		//session.persist(user);
 	session.saveOrUpdate(user);
 		session.getTransaction().commit();
+		
+		/*Session session= sessionFactory.openSession();
+		Transaction trans= session.beginTransaction();
+		session.saveOrUpdate(user);
+		trans.commit();*/
+		
 	}
 	
 	public User findUserByEmail(String userEmail)

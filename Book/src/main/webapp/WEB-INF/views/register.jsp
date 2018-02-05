@@ -30,15 +30,15 @@
 			<div class="col-lg-12">
 			
 		<div class="form-group">
-		<form:errors path="name" cssClass="err"/><br>
+		
 		<label> Name :  </label><br>
-		<input name="name" class="form-control" placeholder= "Enter name"  required/>
+		<input name="name" class="form-control" placeholder= "Enter name"  required/><%-- <form:errors path="name" cssClass="err"/><br> --%>
 		</div>
 		
 		<div class="form-group">
-		<form:errors path="email" cssClass="err"/><br>
+		
 		<label> Email :  </label><br>
-		<input name="email" class="form-control" placeholder= "Enter Email" required />
+		<input name="email" class="form-control" placeholder= "Enter Email" required /><form:errors path="email" cssClass="err"/>
 		</div>
 		
 		<div class="form-group">
@@ -52,9 +52,9 @@
 		</div>
 		
 		<div class="form-group">
-			<form:errors path="phone" cssClass="err"/><br>
+
 		<label> Phone No :  </label><br>
-		<input name="phone" class="form-control" placeholder= "Enter Phone" required />
+		<input name="phone" class="form-control" placeholder= "Enter Phone" required /><form:errors path="phone" cssClass="err"/><br>
 		</div>
 		<br>
 		<br>

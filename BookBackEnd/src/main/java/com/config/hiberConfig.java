@@ -18,6 +18,7 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.DaoImpl.CartDaoImpl;
+import com.DaoImpl.CartItemDaoImpl;
 import com.DaoImpl.CategoryDaoImpl;
 import com.DaoImpl.OrdersDaoImpl;
 import com.DaoImpl.ProductDaoImpl;
@@ -180,12 +181,12 @@ private final static String DATABASE_URL = "jdbc:h2:tcp://localhost/~/BookDb";
 		return new OrdersDaoImpl(sf);
 		
 	}
-	
+
 	@Autowired
 	@Bean(name="CartItemDaoImpl")
-	public CartDaoImpl saveCartItemData(SessionFactory sf)
-	{	System.out.println("CartItem bean.......");
-		return new CartDaoImpl(sf);
+	public CartItemDaoImpl saveCartItemData(SessionFactory sf)
+	{	System.out.println("order bean.......");
+		return new CartItemDaoImpl(sf);
 		
 	}
 	
