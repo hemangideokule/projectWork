@@ -98,8 +98,8 @@ public class CartController {
 		}
 	*/    
 		  /*  public ModelAndView addToCart( HttpServletRequest request)*/
-	    @RequestMapping(value="/addToCart" , method=RequestMethod.POST)
-        public String useraddproducttocart(@PathVariable("pid") int pid, Principal principal, Model model)
+	    @RequestMapping(value="/addToCart/{pid}" , method=RequestMethod.POST)
+        public String useraddproducttocart(@PathVariable("pid") int pid, Principal principal)
 		{
 	   
 	    	Product product = productDaoImpl.get(pid);
@@ -133,11 +133,11 @@ public class CartController {
 				cartItem.getCart().setGrandTotal(cart.getGrandTotal() + product.getPrice());
 				cartItem.getCart().setTotalItems(cart.getTotalItems() + 1);
 				cartItemDaoImpl.updateCartItem(cartItem);
-				System.out.println("cart!=null");
-				}
+				System.out.println("cart!=null carttem to create");
+			}
 
 
-			return "redirect:/goToCart";
+			return "redirect:/checkout";
 			/*ystem.out.println("add to cart");
 			ModelAndView mv= new ModelAndView();
 			

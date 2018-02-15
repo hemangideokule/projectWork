@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 /*import org.springframework.transaction.annotation.Transactional;*/
 
 import com.Dao.CartItemDao;
+import com.model.Cart;
 import com.model.CartItem;
 
 
@@ -34,7 +36,14 @@ public class CartItemDaoImpl implements CartItemDao
 	public List<CartItem> list() {
 		return sessionFactory.getCurrentSession().createQuery("FROM CartItem", CartItem.class).getResultList();
 	}
-	
+	public void insertCart(CartItem cartItem)
+	{
+		Session session= sessionFactory.openSession();
+		session.beginTransaction();
+		//session.persist(user);
+	session.saveOrUpdate(cartItem);
+		session.getTransaction().commit();
+	}
 	public boolean add(CartItem cartItem) {
 		try {
 			// adding category to datbase
@@ -87,7 +96,7 @@ public class CartItemDaoImpl implements CartItemDao
 	public CartItem getCartItemByCartIdAndProductId(int cartid, int pid) {
 		// TODO Auto-generated method stub
 		try{
-		Query q=sessionFactory.getCurrentSession().createQuery("From CartItem where cartId=:cartid and pid=:proid");
+		Query q=sessionFactory.openSession().createQuery("From CartItem where cartId=:cartid and pid=:proid");
 		q.setParameter("cartid", cartid);
 		q.setParameter("proid", pid);
 		

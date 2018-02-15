@@ -30,7 +30,7 @@ public class User  implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
 	public int getId() {
@@ -115,7 +115,7 @@ public String getName() {
 	@JoinColumn(name="cartId")
 	private Cart cart;*/
 	@OneToOne(cascade = CascadeType.PERSIST/*, mappedBy = "user"*/, fetch = FetchType.EAGER)
-@JoinColumn(name="cartId")
+	@JoinColumn(name="cartId")
 	private Cart cart;
 	
 }

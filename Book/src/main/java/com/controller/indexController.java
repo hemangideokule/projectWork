@@ -2,6 +2,7 @@ package com.controller;
 
 
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -17,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.DaoImpl.CartDaoImpl;
+import com.DaoImpl.CartItemDaoImpl;
 import com.DaoImpl.CategoryDaoImpl;
 import com.DaoImpl.ProductDaoImpl;
 import com.DaoImpl.SupplierDaoImpl;
 import com.DaoImpl.UserDaoImpl;
+import com.model.CartItem;
 import com.model.Product;
 import com.model.User;
 
@@ -42,6 +45,8 @@ public class indexController {
 		
 		@Autowired 
 		CartDaoImpl cartDaoImpl;
+		@Autowired 
+		CartItemDaoImpl cartItemDaoImpl;
 	
 @RequestMapping("/")
 public String index()
@@ -87,9 +92,13 @@ return "index";
 		userDaoImpl.insertUser(user);
 		System.out.println("user created");
 	    com.model.Cart cart=new com.model.Cart();
+	    CartItem cartitem=new CartItem();
+	    
 	    cart.setUser(user);
 		user.setCart(cart);
-		cartDaoImpl.insertCart(cart);		
+		cartitem.setCart(cart);
+		cartDaoImpl.insertCart(cart);
+		cartItemDaoImpl.insertCart(cartitem);
 		userDaoImpl.insertUser(user);
 
 	

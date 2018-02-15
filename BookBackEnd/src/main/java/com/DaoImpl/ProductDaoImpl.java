@@ -107,7 +107,7 @@ public class ProductDaoImpl implements ProductDao
 	}
 	public Product get(int pid) {
 
-		return sessionFactory.getCurrentSession().get(Product.class, pid);
+		return sessionFactory.openSession().get(Product.class, pid);
 	}
 	public void updateProduct(Product prod)
 	{

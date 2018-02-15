@@ -36,7 +36,7 @@ src="C:\Users\Hemangi\eclipse-workspace\.metadata\.plugins\org.eclipse.wst.serve
 
 <div class="section" style="padding-bottom:20px;">
 
-<form action="${pageContext.request.contextPath }/addToCart<%-- /${prod.pid} --%>" method="post">
+<form action="${pageContext.request.contextPath }/cart/addToCart/${prod.pid}" method="post">
 
 <input type="hidden"  value="${prod.pid}" name="pid"/>
 <input type="hidden"  value="${prod.price}" name="pPrice"/>

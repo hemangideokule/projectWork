@@ -67,7 +67,7 @@ Session session=sessionFactory.openSession();
 	}
 	public User getUserByUserName(String email) {
 		
-		return	(User) sessionFactory.getCurrentSession().createQuery("FROM User WHERE email=:email").setParameter("email", email).getSingleResult();
+		return	(User) sessionFactory.openSession().createQuery("FROM User WHERE email=:email").setParameter("email", email).getSingleResult();
 						
 			}
 
