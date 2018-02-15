@@ -36,12 +36,12 @@ src="C:\Users\Hemangi\eclipse-workspace\.metadata\.plugins\org.eclipse.wst.serve
 
 <div class="section" style="padding-bottom:20px;">
 
-<form action="${pageContext.request.contextPath }/addToCart" method="post">
+<form action="${pageContext.request.contextPath }/addToCart<%-- /${prod.pid} --%>" method="post">
 
-<input type="hidden"  value="${prod.pid }" name="pid"/>
-<input type="hidden"  value="${prod.price }" name="pPrice"/>
-<input type="hidden"  value="${prod.prodName }" name="pName"/>
-<input type="hidden"  value="${prod.imgName }" name="imgName"/>
+<input type="hidden"  value="${prod.pid}" name="pid"/>
+<input type="hidden"  value="${prod.price}" name="pPrice"/>
+<input type="hidden"  value="${prod.prodName}" name="pName"/>
+<input type="hidden"  value="${prod.imgName}" name="imgName"/>
 <!-- <label>Quantity</label>
 <input type="number" class="form-control" name="pQty" required/><br><br> -->
 

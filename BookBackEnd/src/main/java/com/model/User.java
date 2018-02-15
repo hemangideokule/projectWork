@@ -3,6 +3,7 @@ package com.model;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -29,7 +30,7 @@ public class User  implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	public int getId() {
@@ -39,7 +40,8 @@ public class User  implements Serializable
 		this.id = id;
 	}
 
-	@NotNull
+/*	@NotNull*/
+	@Column(nullable=false)
 	private String password;
 	@NotNull
 	private String name;
@@ -109,7 +111,11 @@ public String getName() {
 	}
 	
 	
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
+	/*@OneToOne(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
 	@JoinColumn(name="cartId")
+	private Cart cart;*/
+	@OneToOne(cascade = CascadeType.PERSIST/*, mappedBy = "user"*/, fetch = FetchType.EAGER)
+@JoinColumn(name="cartId")
 	private Cart cart;
+	
 }

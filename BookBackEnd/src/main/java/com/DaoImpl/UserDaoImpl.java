@@ -1,7 +1,7 @@
 package com.DaoImpl;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.transaction.annotation.Transactional;
 //import org.springframework.stereotype.Repository;
@@ -70,5 +70,18 @@ Session session=sessionFactory.openSession();
 		return	(User) sessionFactory.getCurrentSession().createQuery("FROM User WHERE email=:email").setParameter("email", email).getSingleResult();
 						
 			}
+
+	public void updateUser(User user) {
+
+		Session session= sessionFactory.openSession();
+		Transaction trans= session.beginTransaction();
+		session.update(user);
+		trans.commit();
+		
+		/*session.saveOrUpdate(prod);
+		*/
+		
+		System.out.println("update method in userdaoimpl");
+	}
 	
 }

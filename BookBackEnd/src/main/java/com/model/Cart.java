@@ -5,11 +5,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
+import org.springframework.stereotype.Component;
 
-//import org.springframework.stereotype.Component;
 
-
-//@Component
+@Component
 @Entity
 public class Cart  implements Serializable
 
@@ -30,10 +29,13 @@ public class Cart  implements Serializable
 	@JoinColumn(name="email")
 	private User user;*/
 	
-	@OneToOne(cascade = CascadeType.PERSIST,fetch=FetchType.EAGER)
+/*	@OneToOne(cascade = CascadeType.PERSIST,fetch=FetchType.EAGER)
 	@JoinColumn(name="id")
 	private User user;
-	
+	*/
+	@OneToOne (cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
+	@JoinColumn(name="id")
+	private User user;
 	@OneToMany(targetEntity=CartItem.class,fetch=FetchType.EAGER,mappedBy="cart")
 	/*@JoinColumn(name="id")*/
 	private Set<CartItem> cartItem=new HashSet<CartItem>();

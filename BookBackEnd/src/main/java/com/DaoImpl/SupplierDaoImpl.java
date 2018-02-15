@@ -92,7 +92,7 @@ public class SupplierDaoImpl implements SupplierDao
 		/*session.saveOrUpdate(prod);
 		*/
 		
-		System.out.println("update method in daoimpl");
+		System.out.println("update method in suuplierdaoimpl");
 	
 	}
 	

@@ -97,13 +97,13 @@ public class CartController {
 		return mv;
 		}
 	*/    
-	    
+		  /*  public ModelAndView addToCart( HttpServletRequest request)*/
 	    @RequestMapping(value="/addToCart" , method=RequestMethod.POST)
-	  /*  public ModelAndView addToCart( HttpServletRequest request)*/
-	    public String useraddproducttocart(@PathVariable("pid") int pid, Principal principal, Model model)
+        public String useraddproducttocart(@PathVariable("pid") int pid, Principal principal, Model model)
 		{
-	    	System.out.println("pid="+pid);
+	   
 	    	Product product = productDaoImpl.get(pid);
+	     	System.out.println("pid="+pid);
 			User user = userDaoImpl.getUserByUserName(principal.getName());
 			System.out.println("user="+user);
 			Cart cart = user.getCart();
@@ -124,6 +124,7 @@ public class CartController {
 				cartItems.add(cartItem);
 				cart.setCartItem(cartItems);
 				cartDaoImpl.updateCart(cart);
+				System.out.println("cart==null");
 				
 			} else {
 				System.out.println("entering into else");
@@ -132,7 +133,8 @@ public class CartController {
 				cartItem.getCart().setGrandTotal(cart.getGrandTotal() + product.getPrice());
 				cartItem.getCart().setTotalItems(cart.getTotalItems() + 1);
 				cartItemDaoImpl.updateCartItem(cartItem);
-			}
+				System.out.println("cart!=null");
+				}
 
 
 			return "redirect:/goToCart";

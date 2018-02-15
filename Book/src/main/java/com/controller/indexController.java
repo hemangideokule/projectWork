@@ -1,6 +1,8 @@
 package com.controller;
 
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +16,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.DaoImpl.CartDaoImpl;
 import com.DaoImpl.CategoryDaoImpl;
 import com.DaoImpl.ProductDaoImpl;
 import com.DaoImpl.SupplierDaoImpl;
 import com.DaoImpl.UserDaoImpl;
 import com.model.Product;
 import com.model.User;
+
+
 
 @Controller
 public class indexController {
@@ -34,6 +39,9 @@ public class indexController {
 		
 		@Autowired 
 		CategoryDaoImpl categoryDaoImpl;
+		
+		@Autowired 
+		CartDaoImpl cartDaoImpl;
 	
 @RequestMapping("/")
 public String index()
@@ -74,9 +82,24 @@ return "index";
 	else
 	{
 		System.out.println("noErrors");
+	
 		user.setRole("ROLE_USER");
 		userDaoImpl.insertUser(user);
+		System.out.println("user created");
+	    com.model.Cart cart=new com.model.Cart();
+	    cart.setUser(user);
+		user.setCart(cart);
+		cartDaoImpl.insertCart(cart);		
+		userDaoImpl.insertUser(user);
+
+	
+		
+/*		cart.getCartId();*/
+	
+		System.out.println("else part of saveReg");
+		
 		mav.setViewName("index");
+		
 		return mav;
 	}
 	}
@@ -141,7 +164,7 @@ return "index";
 	{System.out.println("hi");
 	ModelAndView mv= new ModelAndView();
 		Product p= productDaoImpl.findByProdId(pid);
-	/*List<Product> prod= productDaoImpl.findByProdId(pid);*/
+	
 	mv.addObject("prod",p);
 	System.out.println("hi too");
       mv.setViewName("productDetails");
