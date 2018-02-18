@@ -98,20 +98,28 @@ public class CartController {
 		}
 	*/    
 		  /*  public ModelAndView addToCart( HttpServletRequest request)*/
-	    @RequestMapping(value="/addToCart/{pid}" , method=RequestMethod.POST)
-        public String useraddproducttocart(@PathVariable("pid") int pid, Principal principal)
+	    @RequestMapping(value="/addToCart//{pid}" , method=RequestMethod.POST)
+        public String useraddproducttocart(@PathVariable("pid") int pid, Principal principal, Model model)
 		{
-	   
+	    	/*Cart cart=new Cart();
+	    	   CartItem cartitem=new CartItem();
+	   		cartitem.setCart(cart);
+	    	cartItemDaoImpl.insertCart(cartitem);
+			System.out.println("cartItem object="+cartitem);*/
 	    	Product product = productDaoImpl.get(pid);
-	     	System.out.println("pid="+pid);
+	    	System.out.println("pid ="+product.getPid());
 			User user = userDaoImpl.getUserByUserName(principal.getName());
 			System.out.println("user="+user);
 			Cart cart = user.getCart();
 			System.out.println("cart="+cart);
-			
+		
 			CartItem cartItem = cartItemDaoImpl.getCartItemByCartIdAndProductId(cart.getCartId(), product.getPid());
-			Set<CartItem> cartItems = null;
-			if (cartItem == null) {
+			System.out.println("cart id ="+cart.getCartId());
+			System.out.println("product id ="+product.getPid());
+			
+			System.out.println("cartitem="+cartItem);
+	Set<CartItem> cartItems = null;
+			/*if (cartItem == null) {
 				
 				cartItem = new CartItem();
 				cartItem.setCart(cart);
@@ -122,22 +130,28 @@ public class CartController {
 				cart.setTotalItems(cart.getTotalItems() + 1);
 				cartItems = new HashSet<CartItem>();
 				cartItems.add(cartItem);
+				System.out.println("cart item added");
 				cart.setCartItem(cartItems);
+				System.out.println("set the carteitems");
 				cartDaoImpl.updateCart(cart);
+				cartItemDaoImpl.updateCartItem(cartItem);
 				System.out.println("cart==null");
 				
-			} else {
+			} else {*/
 				System.out.println("entering into else");
-				cartItem.setQuantity(cartItem.getQuantity() + 1);
+				cartItem.setQuantity(cartItem.getQuantity());
+				cartItem.setProduct(product);
 				cartItem.setTotalPrice(cartItem.getTotalPrice() + product.getPrice());
+				System.out.println("cartItem.setTotalPrice : "+ product.getPrice());
 				cartItem.getCart().setGrandTotal(cart.getGrandTotal() + product.getPrice());
 				cartItem.getCart().setTotalItems(cart.getTotalItems() + 1);
+				System.out.println("cartItem.getCart().setTotalItems"+ cart.getTotalItems());
 				cartItemDaoImpl.updateCartItem(cartItem);
-				System.out.println("cart!=null carttem to create");
-			}
+				System.out.println("cart!=null carttem to create="+cartItem);
+			//}
 
 
-			return "redirect:/checkout";
+			return "redirect:/cart";
 			/*ystem.out.println("add to cart");
 			ModelAndView mv= new ModelAndView();
 			

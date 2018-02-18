@@ -58,7 +58,7 @@ public class CartItemDaoImpl implements CartItemDao
 	public boolean updateCartItem(CartItem cartItem) {
 		try {
 			// adding category to datbase
-			sessionFactory.getCurrentSession().update(cartItem);
+			sessionFactory.openSession().update(cartItem);
 
 			return true;
 		} catch (Exception e) {
@@ -93,16 +93,24 @@ public class CartItemDaoImpl implements CartItemDao
 		q.executeUpdate();
 	}
 
-	public CartItem getCartItemByCartIdAndProductId(int cartid, int pid) {
+	public CartItem getCartItemByCartIdAndProductId(int cartid, int proid) {
 		// TODO Auto-generated method stub
 		try{
-		Query q=sessionFactory.openSession().createQuery("From CartItem where cartId=:cartid and pid=:proid");
+			System.out.println(" entering getCartItemByCartIdAndProductId");
+			System.out.println(cartid +" is cart id and "+proid+" is pid");
+		Query q=sessionFactory.openSession().createQuery("From CartItem where cartId=:cartid and pid=:pid");
+		System.out.println("query executed..");
+		System.out.println("exiting getCartItemByCartIdAndProductId");
 		q.setParameter("cartid", cartid);
-		q.setParameter("proid", pid);
-		
-		return (CartItem)q.getSingleResult();
-		}catch(Exception e)
+		System.out.println("cartid="+cartid);
+		q.setParameter("pid", proid);
+	System.out.println("prodid="+proid);
+		/*System.out.println("cartitem :"+(CartItem)q.getSingleResult());*/
+		return (CartItem) q.getSingleResult();
+		}
+		catch(Exception e)
 		{
+			System.out.println("enteringg exception of getCartItemByCartIdAndProductId");
 			return null;
 		}
 	}

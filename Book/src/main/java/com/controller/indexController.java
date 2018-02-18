@@ -97,9 +97,14 @@ return "index";
 	    cart.setUser(user);
 		user.setCart(cart);
 		cartitem.setCart(cart);
+
 		cartDaoImpl.insertCart(cart);
-		cartItemDaoImpl.insertCart(cartitem);
+		System.out.println("cart object="+cart);
+	
 		userDaoImpl.insertUser(user);
+		System.out.println("User object="+user);
+		cartItemDaoImpl.insertCart(cartitem);
+		System.out.println("cartItem object="+cartitem);
 
 	
 		

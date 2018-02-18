@@ -33,23 +33,23 @@
 <div class="item active">
 <%-- <img class="img-responsive centre block" class="img-responsive centre block" src="<spring:url value="/resources/pic1.jpg/"></spring:url>" style="width:100%" height="80%">
  --%>
-<img class="img-responsive centre block"  src="E:\pic1.jpg" style="width:100%" "height:100%">
+<img class="img-responsive centre block"  src="E:/pic1.jpg" style="width:100%" "height:100%">
 
 </div>
 <div class="item">
 <%-- <img class="img-responsive centre block" class="img-responsive centre block" src="<spring:url value="/resources/pic2.jpg/"></spring:url>" style="width:100%"> 
  --%>
- <img class="img-responsive centre block"  src="E:\pic5.jpg" style="width:100%" "height:100%">
+ <img class="img-responsive centre block"  src="E:/pic5.jpg" style="width:100%" "height:100%">
  </div>
 <div class="item">
 <%-- <img class="img-responsive centre block" class="img-responsive centre block" src="<springs:url value="/resources/pic3.jpg/"></spring:url>" style="width:100%">
  --%>
- <img class="img-responsive centre block" src="E:\pic3.jpg" style="width:100%" "height:100%">
+ <img class="img-responsive centre block" src="E:/pic3.jpg" style="width:100%" "height:100%">
  </div>
 <div class="item">
 <%-- <img class="img-responsive centre block" class="img-responsive centre block" src="<spring:url value="/resources/pic4.jpg/"></spring:url>" style="width:100%">
  --%>
- <img class="img-responsive centre block"  src="E:\pic4.jpg" style="width:100%" "height:100%">
+ <img class="img-responsive centre block"  src="E:/pic4.jpg" style="width:100%" "height:100%">
  </div>
 
 
